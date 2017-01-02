@@ -13,12 +13,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+/*
+dejamos esto pendiente para los reportes
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
-
+*/
 
 public class frminventario extends javax.swing.JFrame {
 
@@ -794,6 +796,7 @@ void inicio(){
     private Connection connection=new conexion().conectar();
     private void btnImpresionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImpresionActionPerformed
         //Impresion de inventario
+        /*
         Map p=new HashMap();
         JasperReport report;
         JasperPrint print;
@@ -808,6 +811,7 @@ void inicio(){
         } catch (Exception e) {
             e.printStackTrace();
         }
+        */
     }//GEN-LAST:event_btnImpresionActionPerformed
     
     /**
