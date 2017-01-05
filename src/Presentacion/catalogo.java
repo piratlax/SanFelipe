@@ -1413,8 +1413,8 @@ public void asignarAutocompletadoMaquila2() {
         }
     }
     private void btnIntegrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIntegrarActionPerformed
-        // preparamos la funcion de integracion a "manipulacion"
         
+        // preparamos la funcion de integracion a "manipulacion"        
         integraTabla("manipulacion");
 
 
@@ -1526,6 +1526,9 @@ public void asignarAutocompletadoMaquila2() {
                     btnEditar.setEnabled(false);
                     btnCrear.setEnabled(false);
                     btnIntegrar.setEnabled(true);
+                    btnIntegrarCostura.setEnabled(true);
+                    btnIntegrarInyeccion.setEnabled(true);
+                    btnIntegrarTotal.setEnabled(true);
                     btnImagen.setEnabled(true);
                     chkActivo.setEnabled(false);
                     txtSubManipulacion.setEnabled(false);
