@@ -27,10 +27,18 @@ public class catalogo extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         asignarAutocompletado();
         asignarAutocompletadoMaquila();
+        asignarAutocompletado1();
+        asignarAutocompletadoMaquila1();
+        asignarAutocompletado2();
+        asignarAutocompletadoMaquila2();
         btnIntegrar.setEnabled(false);
+        btnIntegrarCostura.setEnabled(false);
+        btnIntegrarInyeccion.setEnabled(false);
+        btnIntegrarTotal.setEnabled(false);
         btnImagen.setEnabled(false);
     }
 
+    // iniciamos autocompletado de los 3 campos dobles
     public void asignarAutocompletado() {
         TextAutoCompleter textAutoCompleter = new TextAutoCompleter(txtPredecible);
         textAutoCompleter.setMode(0); // infijo
@@ -48,7 +56,7 @@ public class catalogo extends javax.swing.JFrame {
             }
 
         } catch (SQLException ex) {
-            System.out.println("Sin poder ejecutar el query a la tabla");
+            System.out.println("Sin poder ejecutar el query a la tabla1");
         }
 
     }
@@ -70,11 +78,96 @@ public class catalogo extends javax.swing.JFrame {
             }
 
         } catch (SQLException ex) {
-            System.out.println("Sin poder ejecutar el query a la tabla");
+            System.out.println("Sin poder ejecutar el query a la tabla2");
         }
 
     }
+    
+    public void asignarAutocompletado1() {
+        TextAutoCompleter textAutoCompleter = new TextAutoCompleter(txtPredecible1);
+        textAutoCompleter.setMode(0); // infijo
+        textAutoCompleter.setCaseSensitive(false); //No sensible a mayúsculas
 
+        //iniciamos
+        try {
+            String sql = "SELECT * FROM inventario";
+            Statement completar;
+            completar = cn.createStatement();
+            ResultSet rs = completar.executeQuery(sql);
+            while (rs.next()) {
+                textAutoCompleter.addItem(rs.getString("nombre"));
+
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Sin poder ejecutar el query a la tabla1");
+        }
+
+    }
+    
+    public void asignarAutocompletado2() {
+        TextAutoCompleter textAutoCompleter = new TextAutoCompleter(txtPredecible2);
+        textAutoCompleter.setMode(0); // infijo
+        textAutoCompleter.setCaseSensitive(false); //No sensible a mayúsculas
+
+        //iniciamos
+        try {
+            String sql = "SELECT * FROM inventario";
+            Statement completar;
+            completar = cn.createStatement();
+            ResultSet rs = completar.executeQuery(sql);
+            while (rs.next()) {
+                textAutoCompleter.addItem(rs.getString("nombre"));
+
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Sin poder ejecutar el query a la tabla1");
+        }
+
+    }
+public void asignarAutocompletadoMaquila1() {
+        TextAutoCompleter textAutoCompleter = new TextAutoCompleter(txtMaquila1);
+        textAutoCompleter.setMode(0); // infijo
+        textAutoCompleter.setCaseSensitive(false); //No sensible a mayúsculas
+
+        //iniciamos
+        try {
+            String sql = "SELECT * FROM maquila";
+            Statement completar;
+            completar = cn.createStatement();
+            ResultSet rs = completar.executeQuery(sql);
+            while (rs.next()) {
+                textAutoCompleter.addItem(rs.getString("nombre"));
+
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Sin poder ejecutar el query a la tabla2");
+        }
+
+    }
+public void asignarAutocompletadoMaquila2() {
+        TextAutoCompleter textAutoCompleter = new TextAutoCompleter(txtMaquila2);
+        textAutoCompleter.setMode(0); // infijo
+        textAutoCompleter.setCaseSensitive(false); //No sensible a mayúsculas
+
+        //iniciamos
+        try {
+            String sql = "SELECT * FROM maquila";
+            Statement completar;
+            completar = cn.createStatement();
+            ResultSet rs = completar.executeQuery(sql);
+            while (rs.next()) {
+                textAutoCompleter.addItem(rs.getString("nombre"));
+
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Sin poder ejecutar el query a la tabla2");
+        }
+
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
