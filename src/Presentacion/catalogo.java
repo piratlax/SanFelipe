@@ -1180,7 +1180,12 @@ public void asignarAutocompletadoMaquila2() {
     }// </editor-fold>//GEN-END:initComponents
 
     public void integraTabla(String proceso){
-        System.out.println(proceso);
+       
+    }
+    private void btnIntegrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIntegrarActionPerformed
+        
+        // preparamos la funcion de integracion a "manipulacion"        
+       
         //verificamos si es maquila o inventario a integrar el modelo
 
         //checamos que no tengan ambos campos con texto
@@ -1281,12 +1286,12 @@ public void asignarAutocompletadoMaquila2() {
                                     + Consumo + "','"
                                     + Precio + "','"
                                     + txtResultado + "','"
-                                    + Activo + "','"+proceso+"');";
+                                    + Activo + "','manipulacion');";
                             stmt.executeUpdate(grabar);
 
                             stmt.close();
                             txtSubManipulacion.setText("0.00");
-                            mostrarTabla();
+                            mostrarTabla("manipulacion");
                         } catch (SQLException ex) {
                             Logger.getLogger(frminventario.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -1386,14 +1391,14 @@ public void asignarAutocompletadoMaquila2() {
                                     + Nombre + "','"
                                     + Precio + "','"
                                     + txtResultado + "','"
-                                    + Activo + "','"+proceso+"');";
+                                    + Activo + "','manipulacion');";
                             stmt.executeUpdate(grabar);
 
                             stmt.close();
                             txtSubManipulacion.setText("0.00");
                             txtPrecio1.setText("");
                             txtMaquila.setText("");
-                            mostrarTabla();
+                            mostrarTabla("manipulacion");
                         } catch (SQLException ex) {
                             Logger.getLogger(frminventario.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -1411,18 +1416,12 @@ public void asignarAutocompletadoMaquila2() {
             
             // ********** Termina captura de maquila
         }
-    }
-    private void btnIntegrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIntegrarActionPerformed
-        
-        // preparamos la funcion de integracion a "manipulacion"        
-        integraTabla("manipulacion");
-
 
         
     }//GEN-LAST:event_btnIntegrarActionPerformed
 
-    public void mostrarTabla() {
-        String sql = "SELECT * FROM CALZADO where modelo='" + txtModelo.getText() + "' AND proceso='manipulacion' AND articulo='"
+    public void mostrarTabla(String parametro) {
+        String sql = "SELECT * FROM CALZADO where modelo='" + txtModelo.getText() + "' AND proceso='"+parametro+"' AND articulo='"
                 + txtArticulo.getText() + "'";
         String[] cabecera = {"Codigo", "Pieza", "Nombre", "Medida", "Consumo", "Precio", "total"};
         // se definen los registros que llevara la tabla
@@ -1570,8 +1569,237 @@ public void asignarAutocompletadoMaquila2() {
 
     private void btnIntegrarCosturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIntegrarCosturaActionPerformed
         // preparamos la funcion de integracion a "Costura"
-        
-        integraTabla("costura");
+               
+        //verificamos si es maquila o inventario a integrar el modelo
+
+        //checamos que no tengan ambos campos con texto
+        if (txtPredecible1.getText().length() > 1 && txtMaquila1.getText().length() > 1) {
+            JOptionPane.showMessageDialog(this, "Solo integra un elemento a la vez");
+        } // vericamos que ambos no esten vacios
+        else if (txtPredecible1.getText().length() == 0 && txtMaquila1.getText().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Agrega un material o una maquila");
+        } else if (txtPredecible1.getText().length() > 1) {
+            //aqui integramos un material del inventario
+
+            //primero verificamos que si este en la base de datos de inventario
+            int contador = 0;
+            try {
+                String checar = "SELECT * FROM inventario WHERE nombre='" + txtPredecible1.getText() + "'";
+                Statement repetido;
+                repetido = cn.createStatement();
+                ResultSet buscar = repetido.executeQuery(checar);
+                while (buscar.next()) {
+                    contador = 1;
+
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(frminventario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (contador == 1) {
+                //revisamos que no este repetido el material en el calzado
+
+                int material = 0;
+                try {
+                    String checar = "SELECT * FROM calzado WHERE nombre='" + txtPredecible1.getText() + "' and modelo='"
+                            + txtModelo.getText() + "' and articulo='" + txtArticulo.getText() + "'";
+                    Statement repetido;
+                    repetido = cn.createStatement();
+                    ResultSet buscar = repetido.executeQuery(checar);
+                    while (buscar.next()) {
+                        material++;
+                        JOptionPane.showMessageDialog(this, "El material ya esta en la hoja de especificacion");
+
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(frminventario.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if (material == 0) {
+                    // como si existe el material en la bd de datos de inventario, procedemos a integrarlo a Calzado
+                    if (txtPar1.getText().length() == 0) {
+                        JOptionPane.showMessageDialog(this, "Falta agregar el costo");
+                    } else if (txtPrecio1.getText().length() == 0) {
+                        JOptionPane.showMessageDialog(this, "Falta agregar el Precio");
+                    } else {
+                        //Asignamos variables a la especificacion
+                        String Linea = txtLinea.getText().toUpperCase();
+                        String Modelo = txtModelo.getText().toUpperCase();
+                        String Articulo = txtArticulo.getText().toUpperCase();
+                        String Color = txtColor.getText().toUpperCase();
+                        String Nombre = txtPredecible1.getText();
+                        String Consumo = txtPar1.getText();
+                        String Precio = txtPrecio1.getText();
+                        String Codigo = null;
+                        String Pieza = null;
+                        String Medida = null;
+                        String Activo = "1";
+                        //calculamos el costo
+                        String txtResultado = redondeo();
+                        // verificamos si esta seleccionado
+                        if (!chkActivo.isSelected()) {
+                            Activo = "0";
+                        }
+                        String sql = "SELECT * FROM inventario WHERE nombre='" + txtPredecible1.getText() + "'";
+
+                        //buscamos en la base de datos Inventario las especificaciones faltantes
+                        try {
+                            Statement completar;
+                            completar = cn.createStatement();
+                            ResultSet rs = completar.executeQuery(sql);
+                            while (rs.next()) {
+                                Codigo = rs.getString("codigo");
+                                Pieza = rs.getString("pieza");
+                                Medida = rs.getString("medida");
+                            }
+                        } catch (SQLException ex) {
+                            System.out.println("Sin poder ejecutar el query para asignar valores");
+                        }
+
+                        //ya teniendo todos los valores integramos la especificacion a la BD calzado
+                        try {
+                            Statement stmt = cn.createStatement();
+                            String grabar = "INSERT INTO calzado (modelo,codigo,linea,articulo,color,pieza,nombre,medida,consumo,precio,resultado,estado,proceso) "
+                                    + "VALUES ('"
+                                    + Modelo + "','"
+                                    + Codigo + "','"
+                                    + Linea + "','"
+                                    + Articulo + "','"
+                                    + Color + "','"
+                                    + Pieza + "','"
+                                    + Nombre + "','"
+                                    + Medida + "','"
+                                    + Consumo + "','"
+                                    + Precio + "','"
+                                    + txtResultado + "','"
+                                    + Activo + "','costura');";
+                            stmt.executeUpdate(grabar);
+
+                            stmt.close();
+                            txtSubManipulacion1.setText("0.00");
+                            mostrarTabla("costura");
+                        } catch (SQLException ex) {
+                            Logger.getLogger(frminventario.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                    }
+                    
+                }
+            }if (contador == 0) {
+                        JOptionPane.showMessageDialog(this, "No modifiques la ventana de materiales");
+                        txtPredecible1.setText("");
+                        txtPar1.setText("");
+                        txtPrecio1.setText("");
+                    }
+        } else if (txtMaquila1.getText().length()>0){
+            // ********** Inicia Captura de Maquila
+            
+            
+            //primero verificamos que si este en la base de datos de maquila
+            int contador = 0;
+            try {
+                String checar = "SELECT * FROM maquila WHERE nombre='" + txtMaquila1.getText() + "'";
+                Statement repetido;
+                repetido = cn.createStatement();
+                ResultSet buscar = repetido.executeQuery(checar);
+                while (buscar.next()) {
+                    contador = 1;
+
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(frminventario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (contador == 1) {
+                //revisamos que no este repetido la maquila en el calzado
+
+                int maquila = 0;
+                try {
+                    String checar = "SELECT * FROM calzado WHERE nombre='" + txtMaquila1.getText() + "' and modelo='"
+                            + txtModelo.getText() + "' and articulo='" + txtArticulo.getText() + "'";
+                    Statement repetido;
+                    repetido = cn.createStatement();
+                    ResultSet buscar = repetido.executeQuery(checar);
+                    while (buscar.next()) {
+                        maquila++;
+                        JOptionPane.showMessageDialog(this, "La maquila ya esta en la hoja de especificacion");
+
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(frminventario.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if (maquila == 0) {
+                    // como si existe el material en la bd de datos de inventario, procedemos a integrarlo a Calzado
+                    if (txtPrecio1.getText().length() == 0) {
+                        JOptionPane.showMessageDialog(this, "Falta agregar el Precio de la maquila");
+                    } else {
+                        //Asignamos variables a la especificacion
+                        String Linea = txtLinea.getText().toUpperCase();
+                        String Modelo = txtModelo.getText().toUpperCase();
+                        String Articulo = txtArticulo.getText().toUpperCase();
+                        String Color = txtColor.getText().toUpperCase();
+                        String Nombre = txtMaquila1.getText();
+                        String Precio = txtPrecio1.getText();
+                        String Codigo = null;
+                        String Pieza = null;
+                        String Activo = "1";
+                        //Asignamos el precio como resultado
+                        String txtResultado = Precio;
+                        // verificamos si esta seleccionado
+                        if (!chkActivo.isSelected()) {
+                            Activo = "0";
+                        }
+                        String sql = "SELECT * FROM maquila WHERE nombre='" + txtMaquila.getText() + "'";
+
+                        //buscamos en la base de datos Maquila las especificaciones faltantes
+                        try {
+                            Statement completar;
+                            completar = cn.createStatement();
+                            ResultSet rs = completar.executeQuery(sql);
+                            while (rs.next()) {
+                                Codigo = rs.getString("codigo");
+                                Pieza = rs.getString("pieza");
+                            }
+                        } catch (SQLException ex) {
+                            System.out.println("Sin poder ejecutar el query para asignar valores de maquila");
+                        }
+
+                        //ya teniendo todos los valores integramos la especificacion a la BD calzado
+                        try {
+                            Statement stmt = cn.createStatement();
+                            String grabar = "INSERT INTO calzado (modelo,codigo,linea,articulo,color,pieza,nombre,precio,resultado,estado,proceso) "
+                                    + "VALUES ('"
+                                    + Modelo + "','"
+                                    + Codigo + "','"
+                                    + Linea + "','"
+                                    + Articulo + "','"
+                                    + Color + "','"
+                                    + Pieza + "','"
+                                    + Nombre + "','"
+                                    + Precio + "','"
+                                    + txtResultado + "','"
+                                    + Activo + "','costura1');";
+                            stmt.executeUpdate(grabar);
+
+                            stmt.close();
+                            txtSubManipulacion1.setText("0.00");
+                            txtPrecio1.setText("");
+                            txtMaquila.setText("");
+                            mostrarTabla("costura");
+                        } catch (SQLException ex) {
+                            Logger.getLogger(frminventario.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                    }
+                    
+                }
+            }if (contador == 0) {
+                        JOptionPane.showMessageDialog(this, "No modifiques la ventana de maquila");
+                        txtPredecible1.setText("");
+                        txtPar1.setText("");
+                        txtPrecio1.setText("");
+                    }
+            
+            
+            // ********** Termina captura de maquila
+        }
     }//GEN-LAST:event_btnIntegrarCosturaActionPerformed
 
     private void txtPrecio2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecio2ActionPerformed
@@ -1595,9 +1823,238 @@ public void asignarAutocompletadoMaquila2() {
     }//GEN-LAST:event_btnActInventario1ActionPerformed
 
     private void btnIntegrarInyeccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIntegrarInyeccionActionPerformed
-         // preparamos la funcion de integracion a "Inyeccion"
+        // preparamos la funcion de integracion a "Inyeccion"
         
-        integraTabla("inyeccion");
+        //verificamos si es maquila o inventario a integrar el modelo
+
+        //checamos que no tengan ambos campos con texto
+        if (txtPredecible2.getText().length() > 1 && txtMaquila2.getText().length() > 1) {
+            JOptionPane.showMessageDialog(this, "Solo integra un elemento a la vez");
+        } // vericamos que ambos no esten vacios
+        else if (txtPredecible2.getText().length() == 0 && txtMaquila2.getText().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Agrega un material o una maquila");
+        } else if (txtPredecible2.getText().length() > 1) {
+            //aqui integramos un material del inventario
+
+            //primero verificamos que si este en la base de datos de inventario
+            int contador = 0;
+            try {
+                String checar = "SELECT * FROM inventario WHERE nombre='" + txtPredecible2.getText() + "'";
+                Statement repetido;
+                repetido = cn.createStatement();
+                ResultSet buscar = repetido.executeQuery(checar);
+                while (buscar.next()) {
+                    contador = 1;
+
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(frminventario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (contador == 1) {
+                //revisamos que no este repetido el material en el calzado
+
+                int material = 0;
+                try {
+                    String checar = "SELECT * FROM calzado WHERE nombre='" + txtPredecible2.getText() + "' and modelo='"
+                            + txtModelo.getText() + "' and articulo='" + txtArticulo.getText() + "'";
+                    Statement repetido;
+                    repetido = cn.createStatement();
+                    ResultSet buscar = repetido.executeQuery(checar);
+                    while (buscar.next()) {
+                        material++;
+                        JOptionPane.showMessageDialog(this, "El material ya esta en la hoja de especificacion");
+
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(frminventario.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if (material == 0) {
+                    // como si existe el material en la bd de datos de inventario, procedemos a integrarlo a Calzado
+                    if (txtPar2.getText().length() == 0) {
+                        JOptionPane.showMessageDialog(this, "Falta agregar el costo");
+                    } else if (txtPrecio2.getText().length() == 0) {
+                        JOptionPane.showMessageDialog(this, "Falta agregar el Precio");
+                    } else {
+                        //Asignamos variables a la especificacion
+                        String Linea = txtLinea.getText().toUpperCase();
+                        String Modelo = txtModelo.getText().toUpperCase();
+                        String Articulo = txtArticulo.getText().toUpperCase();
+                        String Color = txtColor.getText().toUpperCase();
+                        String Nombre = txtPredecible2.getText();
+                        String Consumo = txtPar2.getText();
+                        String Precio = txtPrecio2.getText();
+                        String Codigo = null;
+                        String Pieza = null;
+                        String Medida = null;
+                        String Activo = "1";
+                        //calculamos el costo
+                        String txtResultado = redondeo();
+                        // verificamos si esta seleccionado
+                        if (!chkActivo.isSelected()) {
+                            Activo = "0";
+                        }
+                        String sql = "SELECT * FROM inventario WHERE nombre='" + txtPredecible2.getText() + "'";
+
+                        //buscamos en la base de datos Inventario las especificaciones faltantes
+                        try {
+                            Statement completar;
+                            completar = cn.createStatement();
+                            ResultSet rs = completar.executeQuery(sql);
+                            while (rs.next()) {
+                                Codigo = rs.getString("codigo");
+                                Pieza = rs.getString("pieza");
+                                Medida = rs.getString("medida");
+                            }
+                        } catch (SQLException ex) {
+                            System.out.println("Sin poder ejecutar el query para asignar valores");
+                        }
+
+                        //ya teniendo todos los valores integramos la especificacion a la BD calzado
+                        try {
+                            Statement stmt = cn.createStatement();
+                            String grabar = "INSERT INTO calzado (modelo,codigo,linea,articulo,color,pieza,nombre,medida,consumo,precio,resultado,estado,proceso) "
+                                    + "VALUES ('"
+                                    + Modelo + "','"
+                                    + Codigo + "','"
+                                    + Linea + "','"
+                                    + Articulo + "','"
+                                    + Color + "','"
+                                    + Pieza + "','"
+                                    + Nombre + "','"
+                                    + Medida + "','"
+                                    + Consumo + "','"
+                                    + Precio + "','"
+                                    + txtResultado + "','"
+                                    + Activo + "','inyeccion');";
+                            stmt.executeUpdate(grabar);
+
+                            stmt.close();
+                            txtSubManipulacion2.setText("0.00");
+                            mostrarTabla("inyeccion");
+                        } catch (SQLException ex) {
+                            Logger.getLogger(frminventario.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                    }
+                    
+                }
+            }if (contador == 0) {
+                        JOptionPane.showMessageDialog(this, "No modifiques la ventana de materiales");
+                        txtPredecible.setText("");
+                        txtPar.setText("");
+                        txtPrecio.setText("");
+                    }
+        } else if (txtMaquila.getText().length()>0){
+            // ********** Inicia Captura de Maquila
+            
+            
+            //primero verificamos que si este en la base de datos de maquila
+            int contador = 0;
+            try {
+                String checar = "SELECT * FROM maquila WHERE nombre='" + txtMaquila2.getText() + "'";
+                Statement repetido;
+                repetido = cn.createStatement();
+                ResultSet buscar = repetido.executeQuery(checar);
+                while (buscar.next()) {
+                    contador = 1;
+
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(frminventario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (contador == 1) {
+                //revisamos que no este repetido la maquila en el calzado
+
+                int maquila = 0;
+                try {
+                    String checar = "SELECT * FROM calzado WHERE nombre='" + txtMaquila2.getText() + "' and modelo='"
+                            + txtModelo.getText() + "' and articulo='" + txtArticulo.getText() + "'";
+                    Statement repetido;
+                    repetido = cn.createStatement();
+                    ResultSet buscar = repetido.executeQuery(checar);
+                    while (buscar.next()) {
+                        maquila++;
+                        JOptionPane.showMessageDialog(this, "La maquila ya esta en la hoja de especificacion");
+
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(frminventario.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if (maquila == 0) {
+                    // como si existe el material en la bd de datos de inventario, procedemos a integrarlo a Calzado
+                    if (txtPrecio2.getText().length() == 0) {
+                        JOptionPane.showMessageDialog(this, "Falta agregar el Precio de la maquila");
+                    } else {
+                        //Asignamos variables a la especificacion
+                        String Linea = txtLinea.getText().toUpperCase();
+                        String Modelo = txtModelo.getText().toUpperCase();
+                        String Articulo = txtArticulo.getText().toUpperCase();
+                        String Color = txtColor.getText().toUpperCase();
+                        String Nombre = txtMaquila2.getText();
+                        String Precio = txtPrecio2.getText();
+                        String Codigo = null;
+                        String Pieza = null;
+                        String Activo = "1";
+                        //Asignamos el precio como resultado
+                        String txtResultado = Precio;
+                        // verificamos si esta seleccionado
+                        if (!chkActivo.isSelected()) {
+                            Activo = "0";
+                        }
+                        String sql = "SELECT * FROM maquila WHERE nombre='" + txtMaquila2.getText() + "'";
+
+                        //buscamos en la base de datos Maquila las especificaciones faltantes
+                        try {
+                            Statement completar;
+                            completar = cn.createStatement();
+                            ResultSet rs = completar.executeQuery(sql);
+                            while (rs.next()) {
+                                Codigo = rs.getString("codigo");
+                                Pieza = rs.getString("pieza");
+                            }
+                        } catch (SQLException ex) {
+                            System.out.println("Sin poder ejecutar el query para asignar valores de maquila");
+                        }
+
+                        //ya teniendo todos los valores integramos la especificacion a la BD calzado
+                        try {
+                            Statement stmt = cn.createStatement();
+                            String grabar = "INSERT INTO calzado (modelo,codigo,linea,articulo,color,pieza,nombre,precio,resultado,estado,proceso) "
+                                    + "VALUES ('"
+                                    + Modelo + "','"
+                                    + Codigo + "','"
+                                    + Linea + "','"
+                                    + Articulo + "','"
+                                    + Color + "','"
+                                    + Pieza + "','"
+                                    + Nombre + "','"
+                                    + Precio + "','"
+                                    + txtResultado + "','"
+                                    + Activo + "','inyeccion');";
+                            stmt.executeUpdate(grabar);
+
+                            stmt.close();
+                            txtSubManipulacion2.setText("0.00");
+                            txtPrecio2.setText("");
+                            txtMaquila2.setText("");
+                            mostrarTabla("inyeccion");
+                        } catch (SQLException ex) {
+                            Logger.getLogger(frminventario.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                    }
+                    
+                }
+            }if (contador == 0) {
+                        JOptionPane.showMessageDialog(this, "No modifiques la ventana de maquila");
+                        txtPredecible2.setText("");
+                        txtPar2.setText("");
+                        txtPrecio2.setText("");
+                    }
+            
+            
+            // ********** Termina captura de maquila
+        }
     }//GEN-LAST:event_btnIntegrarInyeccionActionPerformed
 
     private void txtPrecio4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecio4ActionPerformed
