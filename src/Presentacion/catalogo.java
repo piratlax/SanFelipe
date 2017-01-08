@@ -21,6 +21,7 @@ public class catalogo extends javax.swing.JFrame {
     Connection cn = con.conectar();
     // asignamos la primera tabla
     DefaultTableModel manipulacion;
+    DefaultTableModel costura;
 
     public catalogo() {
         initComponents();
@@ -217,19 +218,19 @@ public void asignarAutocompletadoMaquila2() {
         txtPredecible1 = new javax.swing.JTextField();
         btnIntegrarCostura = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tablaMan1 = new javax.swing.JTable();
+        tablaCos = new javax.swing.JTable();
         btnBorrar1 = new javax.swing.JButton();
         btnActualizar1 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        txtPar1 = new javax.swing.JTextField();
+        txtParCost = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        txtPrecio2 = new javax.swing.JTextField();
+        txtPrecioCost = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         txtSubManipulacion1 = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         txtMaquila1 = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
-        txtPrecio3 = new javax.swing.JTextField();
+        txtPrecioMaqCost = new javax.swing.JTextField();
         btnActMaquila1 = new javax.swing.JButton();
         btnNuevaMaquila1 = new javax.swing.JButton();
         btnActInventario1 = new javax.swing.JButton();
@@ -549,7 +550,7 @@ public void asignarAutocompletadoMaquila2() {
             }
         });
 
-        tablaMan1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaCos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -560,7 +561,7 @@ public void asignarAutocompletadoMaquila2() {
                 "Codigo", "Descripcion", "Material", "Unidad", "Consumo", "Precio", "Total"
             }
         ));
-        jScrollPane2.setViewportView(tablaMan1);
+        jScrollPane2.setViewportView(tablaCos);
 
         btnBorrar1.setText("Borrar");
 
@@ -570,21 +571,23 @@ public void asignarAutocompletadoMaquila2() {
 
         jLabel12.setText("Precio");
 
-        txtPrecio2.addActionListener(new java.awt.event.ActionListener() {
+        txtPrecioCost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPrecio2ActionPerformed(evt);
+                txtPrecioCostActionPerformed(evt);
             }
         });
 
         jLabel14.setText("SubTotal");
 
+        txtSubManipulacion1.setEditable(false);
+
         jLabel15.setText("Maquila");
 
         jLabel16.setText("Costo");
 
-        txtPrecio3.addActionListener(new java.awt.event.ActionListener() {
+        txtPrecioMaqCost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPrecio3ActionPerformed(evt);
+                txtPrecioMaqCostActionPerformed(evt);
             }
         });
 
@@ -652,18 +655,18 @@ public void asignarAutocompletadoMaquila2() {
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPar1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtParCost, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btnNuevaMaquila1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                                 .addComponent(jLabel16)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPrecio3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtPrecioMaqCost, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                                 .addComponent(jLabel12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPrecio2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtPrecioCost, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnIntegrarCostura)))
                 .addContainerGap())
@@ -690,15 +693,15 @@ public void asignarAutocompletadoMaquila2() {
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel12)
-                                    .addComponent(txtPrecio2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtPrecioCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel16)
-                                    .addComponent(txtPrecio3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtPrecioMaqCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel9)
-                                    .addComponent(txtPar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtParCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnNuevaMaquila1)))
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -1471,10 +1474,74 @@ public void asignarAutocompletadoMaquila2() {
         }
 
     }
+    
+        public void mostrarTablaCost() {
+        String sql = "SELECT * FROM CALZADO where modelo='" + txtModelo.getText() + "' AND proceso='costura' AND articulo='"
+                + txtArticulo.getText() + "'";
+        String[] cabecera = {"Codigo", "Pieza", "Nombre", "Medida", "Consumo", "Precio", "total"};
+        // se definen los registros que llevara la tabla
+        String[] registros = new String[7];
+        // se hace el llamado sql de todos los usuarios
+
+        System.out.println(sql);
+        //establecemos los anchos en pixeles de las columnas
+        int[] anchos = {80, 250, 700, 80, 80, 80, 80};
+        costura = new DefaultTableModel(null, cabecera);
+
+        try {
+
+            Statement tablaManipulacion;
+            tablaManipulacion = cn.createStatement();
+            ResultSet rs = tablaManipulacion.executeQuery(sql);
+            while (rs.next()) {
+
+                registros[0] = rs.getString("codigo");
+                registros[1] = rs.getString("pieza");
+                registros[2] = rs.getString("nombre");
+                registros[3] = rs.getString("medida");
+                registros[4] = rs.getString("consumo");
+                registros[5] = rs.getString("precio");
+                registros[6] = rs.getString("resultado");
+
+                costura.addRow(registros);
+                // calculamos el subtotal de Manipulacion
+                Double subtotal = Double.parseDouble(txtSubManipulacion1.getText());
+                Double agregar = Double.parseDouble(rs.getString("resultado"));
+                Double resultado = subtotal + agregar;
+                BigDecimal SubTotal = BigDecimal.valueOf(resultado);
+                SubTotal = SubTotal.setScale(2, RoundingMode.HALF_UP);
+                txtSubManipulacion1.setText(String.valueOf(SubTotal));
+            }
+            tablaCos.setModel(costura);
+            for (int i = 0; i < cabecera.length; i++) {
+                tablaCos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+                tablaCos.setFont(new java.awt.Font("Tahoma", 0, 12));
+                
+            }
+                txtPredecible1.setText("");
+                txtParCost.setText("");
+                txtPrecioCost.setText("");
+                txtPrecioMaqCost.setText("");
+
+        } catch (SQLException ex) {
+            System.out.println("Sin poder ejecutar el query a la tabla");
+        }
+
+    }
 
     public String redondeo() {
         Double par = Double.parseDouble(txtPar.getText());
         Double precio = Double.parseDouble(txtPrecio.getText());
+        Double Resultado = par * precio;
+        BigDecimal resultado = BigDecimal.valueOf(Resultado);
+        resultado = resultado.setScale(2, RoundingMode.HALF_UP);
+        String txtResultado = resultado.toString();
+        return txtResultado;
+    }
+    
+    public String redondeoCost() {
+        Double par = Double.parseDouble(txtParCost.getText());
+        Double precio = Double.parseDouble(txtPrecioCost.getText());
         Double Resultado = par * precio;
         BigDecimal resultado = BigDecimal.valueOf(Resultado);
         resultado = resultado.setScale(2, RoundingMode.HALF_UP);
@@ -1615,9 +1682,9 @@ public void asignarAutocompletadoMaquila2() {
                 }
                 if (material == 0) {
                     // como si existe el material en la bd de datos de inventario, procedemos a integrarlo a Calzado
-                    if (txtPar1.getText().length() == 0) {
+                    if (txtParCost.getText().length() == 0) {
                         JOptionPane.showMessageDialog(this, "Falta agregar el costo");
-                    } else if (txtPrecio1.getText().length() == 0) {
+                    } else if (txtPrecioCost.getText().length() == 0) {
                         JOptionPane.showMessageDialog(this, "Falta agregar el Precio");
                     } else {
                         //Asignamos variables a la especificacion
@@ -1626,14 +1693,14 @@ public void asignarAutocompletadoMaquila2() {
                         String Articulo = txtArticulo.getText().toUpperCase();
                         String Color = txtColor.getText().toUpperCase();
                         String Nombre = txtPredecible1.getText();
-                        String Consumo = txtPar1.getText();
-                        String Precio = txtPrecio1.getText();
+                        String Consumo = txtParCost.getText();
+                        String Precio = txtPrecioCost.getText();
                         String Codigo = null;
                         String Pieza = null;
                         String Medida = null;
                         String Activo = "1";
                         //calculamos el costo
-                        String txtResultado = redondeo();
+                        String txtResultado = redondeoCost();
                         // verificamos si esta seleccionado
                         if (!chkActivo.isSelected()) {
                             Activo = "0";
@@ -1675,7 +1742,7 @@ public void asignarAutocompletadoMaquila2() {
 
                             stmt.close();
                             txtSubManipulacion1.setText("0.00");
-                            mostrarTabla("costura");
+                            mostrarTablaCost();
                         } catch (SQLException ex) {
                             Logger.getLogger(frminventario.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -1686,8 +1753,8 @@ public void asignarAutocompletadoMaquila2() {
             }if (contador == 0) {
                         JOptionPane.showMessageDialog(this, "No modifiques la ventana de materiales");
                         txtPredecible1.setText("");
-                        txtPar1.setText("");
-                        txtPrecio1.setText("");
+                        txtParCost.setText("");
+                        txtPrecioCost.setText("");
                     }
         } else if (txtMaquila1.getText().length()>0){
             // ********** Inicia Captura de Maquila
@@ -1727,7 +1794,7 @@ public void asignarAutocompletadoMaquila2() {
                 }
                 if (maquila == 0) {
                     // como si existe el material en la bd de datos de inventario, procedemos a integrarlo a Calzado
-                    if (txtPrecio1.getText().length() == 0) {
+                    if (txtPrecioMaqCost.getText().length() == 0) {
                         JOptionPane.showMessageDialog(this, "Falta agregar el Precio de la maquila");
                     } else {
                         //Asignamos variables a la especificacion
@@ -1736,7 +1803,7 @@ public void asignarAutocompletadoMaquila2() {
                         String Articulo = txtArticulo.getText().toUpperCase();
                         String Color = txtColor.getText().toUpperCase();
                         String Nombre = txtMaquila1.getText();
-                        String Precio = txtPrecio1.getText();
+                        String Precio = txtPrecioMaqCost.getText();
                         String Codigo = null;
                         String Pieza = null;
                         String Activo = "1";
@@ -1746,7 +1813,7 @@ public void asignarAutocompletadoMaquila2() {
                         if (!chkActivo.isSelected()) {
                             Activo = "0";
                         }
-                        String sql = "SELECT * FROM maquila WHERE nombre='" + txtMaquila.getText() + "'";
+                        String sql = "SELECT * FROM maquila WHERE nombre='" + txtMaquila1.getText() + "'";
 
                         //buscamos en la base de datos Maquila las especificaciones faltantes
                         try {
@@ -1775,13 +1842,13 @@ public void asignarAutocompletadoMaquila2() {
                                     + Nombre + "','"
                                     + Precio + "','"
                                     + txtResultado + "','"
-                                    + Activo + "','costura1');";
+                                    + Activo + "','costura');";
                             stmt.executeUpdate(grabar);
 
                             stmt.close();
                             txtSubManipulacion1.setText("0.00");
-                            txtPrecio1.setText("");
-                            txtMaquila.setText("");
+                            txtPrecioMaqCost.setText("");
+                            txtMaquila1.setText("");
                             mostrarTabla("costura");
                         } catch (SQLException ex) {
                             Logger.getLogger(frminventario.class.getName()).log(Level.SEVERE, null, ex);
@@ -1793,8 +1860,8 @@ public void asignarAutocompletadoMaquila2() {
             }if (contador == 0) {
                         JOptionPane.showMessageDialog(this, "No modifiques la ventana de maquila");
                         txtPredecible1.setText("");
-                        txtPar1.setText("");
-                        txtPrecio1.setText("");
+                        txtParCost.setText("");
+                        txtPrecioMaqCost.setText("");
                     }
             
             
@@ -1802,13 +1869,13 @@ public void asignarAutocompletadoMaquila2() {
         }
     }//GEN-LAST:event_btnIntegrarCosturaActionPerformed
 
-    private void txtPrecio2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecio2ActionPerformed
+    private void txtPrecioCostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioCostActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPrecio2ActionPerformed
+    }//GEN-LAST:event_txtPrecioCostActionPerformed
 
-    private void txtPrecio3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecio3ActionPerformed
+    private void txtPrecioMaqCostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioMaqCostActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPrecio3ActionPerformed
+    }//GEN-LAST:event_txtPrecioMaqCostActionPerformed
 
     private void btnActMaquila1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActMaquila1ActionPerformed
         // TODO add your handling code here:
@@ -1872,7 +1939,7 @@ public void asignarAutocompletadoMaquila2() {
                     // como si existe el material en la bd de datos de inventario, procedemos a integrarlo a Calzado
                     if (txtPar2.getText().length() == 0) {
                         JOptionPane.showMessageDialog(this, "Falta agregar el costo");
-                    } else if (txtPrecio2.getText().length() == 0) {
+                    } else if (txtPrecioCost.getText().length() == 0) {
                         JOptionPane.showMessageDialog(this, "Falta agregar el Precio");
                     } else {
                         //Asignamos variables a la especificacion
@@ -1882,7 +1949,7 @@ public void asignarAutocompletadoMaquila2() {
                         String Color = txtColor.getText().toUpperCase();
                         String Nombre = txtPredecible2.getText();
                         String Consumo = txtPar2.getText();
-                        String Precio = txtPrecio2.getText();
+                        String Precio = txtPrecioCost.getText();
                         String Codigo = null;
                         String Pieza = null;
                         String Medida = null;
@@ -1982,7 +2049,7 @@ public void asignarAutocompletadoMaquila2() {
                 }
                 if (maquila == 0) {
                     // como si existe el material en la bd de datos de inventario, procedemos a integrarlo a Calzado
-                    if (txtPrecio2.getText().length() == 0) {
+                    if (txtPrecioCost.getText().length() == 0) {
                         JOptionPane.showMessageDialog(this, "Falta agregar el Precio de la maquila");
                     } else {
                         //Asignamos variables a la especificacion
@@ -1991,7 +2058,7 @@ public void asignarAutocompletadoMaquila2() {
                         String Articulo = txtArticulo.getText().toUpperCase();
                         String Color = txtColor.getText().toUpperCase();
                         String Nombre = txtMaquila2.getText();
-                        String Precio = txtPrecio2.getText();
+                        String Precio = txtPrecioCost.getText();
                         String Codigo = null;
                         String Pieza = null;
                         String Activo = "1";
@@ -2035,7 +2102,7 @@ public void asignarAutocompletadoMaquila2() {
 
                             stmt.close();
                             txtSubManipulacion2.setText("0.00");
-                            txtPrecio2.setText("");
+                            txtPrecioCost.setText("");
                             txtMaquila2.setText("");
                             mostrarTabla("inyeccion");
                         } catch (SQLException ex) {
@@ -2049,7 +2116,7 @@ public void asignarAutocompletadoMaquila2() {
                         JOptionPane.showMessageDialog(this, "No modifiques la ventana de maquila");
                         txtPredecible2.setText("");
                         txtPar2.setText("");
-                        txtPrecio2.setText("");
+                        txtPrecioCost.setText("");
                     }
             
             
@@ -2210,8 +2277,8 @@ public void asignarAutocompletadoMaquila2() {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane panel;
+    private javax.swing.JTable tablaCos;
     private javax.swing.JTable tablaMan;
-    private javax.swing.JTable tablaMan1;
     private javax.swing.JTable tablaMan2;
     private javax.swing.JTable tablaMan3;
     private javax.swing.JTextField txtArticulo;
@@ -2223,17 +2290,17 @@ public void asignarAutocompletadoMaquila2() {
     private javax.swing.JTextField txtMaquila3;
     private javax.swing.JTextField txtModelo;
     private javax.swing.JTextField txtPar;
-    private javax.swing.JTextField txtPar1;
     private javax.swing.JTextField txtPar2;
     private javax.swing.JTextField txtPar3;
+    private javax.swing.JTextField txtParCost;
     private javax.swing.JTextField txtPrecio;
     private javax.swing.JTextField txtPrecio1;
-    private javax.swing.JTextField txtPrecio2;
-    private javax.swing.JTextField txtPrecio3;
     private javax.swing.JTextField txtPrecio4;
     private javax.swing.JTextField txtPrecio5;
     private javax.swing.JTextField txtPrecio6;
     private javax.swing.JTextField txtPrecio7;
+    private javax.swing.JTextField txtPrecioCost;
+    private javax.swing.JTextField txtPrecioMaqCost;
     private javax.swing.JTextField txtPredecible;
     private javax.swing.JTextField txtPredecible1;
     private javax.swing.JTextField txtPredecible2;
