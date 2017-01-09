@@ -36,8 +36,19 @@ public class catalogo extends javax.swing.JFrame {
         btnIntegrar.setEnabled(false);
         btnIntegrarCostura.setEnabled(false);
         btnIntegrarInyeccion.setEnabled(false);
-        btnIntegrarTotal.setEnabled(false);
         btnImagen.setEnabled(false);
+        
+        //desactivamos los campos que no se podran tocar
+        txtSubManipulacion.setEnabled(false);
+        txtSubManipulacion1.setEnabled(false);
+        txtSubManipulacion2.setEnabled(false);
+        txtTotalMan.setEnabled(false);
+        txtTotalCos.setEnabled(false);
+        txtTotalIny.setEnabled(false);
+        txtSubTotal.setEnabled(false);
+        txtCostoFabricacion.setEnabled(false);
+        txtUtilidad.setEnabled(false);
+        
     }
 
     // iniciamos autocompletado de los 3 campos dobles
@@ -271,23 +282,24 @@ public void asignarAutocompletadoMaquila2() {
         txtTotalMan = new javax.swing.JTextField();
         txtTotalCos = new javax.swing.JTextField();
         txtTotalIny = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
+        txtSalariosInyeccion = new javax.swing.JTextField();
         jLabel28 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtSubTotal = new javax.swing.JTextField();
         jLabel29 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtGastosInd = new javax.swing.JTextField();
         jLabel30 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtCostoFabricacion = new javax.swing.JTextField();
         jLabel31 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        txtPorcentaje = new javax.swing.JTextField();
         jLabel32 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        txtUtilidad = new javax.swing.JTextField();
         jLabel33 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        txtMerma = new javax.swing.JTextField();
         jPanel11 = new javax.swing.JPanel();
         jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
+        txtTotal = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         btnImagen = new javax.swing.JButton();
 
@@ -962,8 +974,10 @@ public void asignarAutocompletadoMaquila2() {
 
         jLabel27.setText("Total de Inyeccion y Terminacion");
 
+        txtTotalMan.setEditable(false);
         txtTotalMan.setText("0.00");
 
+        txtTotalCos.setEditable(false);
         txtTotalCos.setText("0.00");
         txtTotalCos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -971,33 +985,40 @@ public void asignarAutocompletadoMaquila2() {
             }
         });
 
+        txtTotalIny.setEditable(false);
         txtTotalIny.setText("0.00");
 
-        jTextField1.setText("0.00");
+        txtSalariosInyeccion.setText("0.00");
 
         jLabel28.setText("SubTotal");
 
-        jTextField2.setText("0.00");
+        txtSubTotal.setEditable(false);
+        txtSubTotal.setText("0.00");
 
         jLabel29.setText("Gastos Indirectos");
 
-        jTextField3.setText("0.00");
+        txtGastosInd.setText("0.00");
 
         jLabel30.setText("Total Costo de fabricacion");
 
-        jTextField4.setText("0.00");
+        txtCostoFabricacion.setText("0.00");
+        txtCostoFabricacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCostoFabricacionActionPerformed(evt);
+            }
+        });
 
         jLabel31.setText("Utilidad");
 
-        jTextField5.setText("20");
+        txtPorcentaje.setText("20");
 
         jLabel32.setText("%");
 
-        jTextField6.setText("0.00");
+        txtUtilidad.setText("0.00");
 
         jLabel33.setText("Merma");
 
-        jTextField7.setText("0.00");
+        txtMerma.setText("0.00");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -1015,7 +1036,7 @@ public void asignarAutocompletadoMaquila2() {
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addComponent(jLabel31)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel32))
                     .addComponent(jLabel33))
@@ -1024,12 +1045,12 @@ public void asignarAutocompletadoMaquila2() {
                     .addComponent(txtTotalIny)
                     .addComponent(txtTotalMan, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
                     .addComponent(txtTotalCos)
-                    .addComponent(jTextField1)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField3)
-                    .addComponent(jTextField4)
-                    .addComponent(jTextField6)
-                    .addComponent(jTextField7))
+                    .addComponent(txtSalariosInyeccion)
+                    .addComponent(txtSubTotal)
+                    .addComponent(txtGastosInd)
+                    .addComponent(txtCostoFabricacion)
+                    .addComponent(txtUtilidad)
+                    .addComponent(txtMerma))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
@@ -1050,29 +1071,29 @@ public void asignarAutocompletadoMaquila2() {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel23)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSalariosInyeccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSubTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel29)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtGastosInd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel30)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCostoFabricacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel31)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel32)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtUtilidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel33)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMerma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -1082,9 +1103,9 @@ public void asignarAutocompletadoMaquila2() {
         jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel34.setText("TOTAL");
 
-        jLabel35.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
-        jLabel35.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel35.setText("0.00");
+        txtTotal.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
+        txtTotal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtTotal.setText("0.00");
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -1093,7 +1114,7 @@ public void asignarAutocompletadoMaquila2() {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel35, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -1103,12 +1124,19 @@ public void asignarAutocompletadoMaquila2() {
                 .addGap(14, 14, 14)
                 .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(49, Short.MAX_VALUE))
         );
 
         jButton1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         jButton1.setText("GUARDAR");
+
+        jButton2.setText("Calcular");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -1136,7 +1164,10 @@ public void asignarAutocompletadoMaquila2() {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addComponent(jButton2)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
@@ -1148,7 +1179,9 @@ public void asignarAutocompletadoMaquila2() {
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(77, 77, 77)
+                        .addComponent(jButton2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBorrar3)
@@ -1507,6 +1540,9 @@ public void asignarAutocompletadoMaquila2() {
                 BigDecimal SubTotal = BigDecimal.valueOf(resultado);
                 SubTotal = SubTotal.setScale(2, RoundingMode.HALF_UP);
                 txtSubManipulacion.setText(String.valueOf(SubTotal));
+                //asignamos el valor en el total
+                txtTotalMan.setText(String.valueOf(SubTotal));
+                calculoTotal();
             }
             tablaMan.setModel(manipulacion);
             for (int i = 0; i < cabecera.length; i++) {
@@ -1521,6 +1557,59 @@ public void asignarAutocompletadoMaquila2() {
             System.out.println("Sin poder ejecutar el query a la tabla");
         }
 
+    }
+    
+    /// Calculamos el valor total del calzado
+    public void calculoTotal(){
+        //asignamos variables
+        Double totalManipulacion=0.00;
+        Double totalCostura=0.00;
+        Double totalInyeccion=0.00;
+        Double salariosInyeccion=0.00;
+        Double total=0.00;
+        Double subTotal=0.00;
+        Double costosFabricacion=0.00;
+        Double gastosIndirectos=0.00;
+        Double porcentaje=0.00;
+        Double utilidad=0.00;
+        Double merma=0.00;
+        
+        //convertimos strings a doubles
+        totalManipulacion=Double.valueOf(txtTotalMan.getText());
+        totalCostura=Double.valueOf(txtTotalCos.getText());
+        totalInyeccion=Double.valueOf(txtTotalIny.getText());
+        salariosInyeccion=Double.valueOf(txtSalariosInyeccion.getText());
+        gastosIndirectos=Double.valueOf(txtGastosInd.getText());
+        porcentaje=Double.valueOf(txtPorcentaje.getText());
+        merma=Double.valueOf(txtMerma.getText());
+
+        //hacemos los calculos
+        subTotal=totalManipulacion+totalCostura+totalInyeccion+salariosInyeccion;
+        
+        costosFabricacion=subTotal+gastosIndirectos;
+        utilidad=costosFabricacion*porcentaje/100;
+        total=costosFabricacion+utilidad+merma;
+        // redondeamos subtotal
+        BigDecimal subtotal = BigDecimal.valueOf(subTotal);
+        subtotal = subtotal.setScale(2, RoundingMode.HALF_UP);
+        
+        // redondeamos costosFabricacion
+        BigDecimal costosfabricacion = BigDecimal.valueOf(costosFabricacion);
+        costosfabricacion = costosfabricacion.setScale(2, RoundingMode.HALF_UP);
+        
+        // redondeamos utilidad
+        BigDecimal Utilidad = BigDecimal.valueOf(utilidad);
+        Utilidad = Utilidad.setScale(2, RoundingMode.HALF_UP);
+        
+        // redondeamos total
+        BigDecimal Total = BigDecimal.valueOf(total);
+        Total = Total.setScale(2, RoundingMode.HALF_UP);
+        
+        //colocamos los valores
+        txtSubTotal.setText(String.valueOf(subtotal));
+        txtCostoFabricacion.setText(String.valueOf(costosfabricacion));
+        txtUtilidad.setText(String.valueOf(Utilidad));
+        txtTotal.setText(String.valueOf(Total));
     }
     
         public void mostrarTablaCost() {
@@ -1559,6 +1648,10 @@ public void asignarAutocompletadoMaquila2() {
                 BigDecimal SubTotal = BigDecimal.valueOf(resultado);
                 SubTotal = SubTotal.setScale(2, RoundingMode.HALF_UP);
                 txtSubManipulacion1.setText(String.valueOf(SubTotal));
+                
+                //asignamos el valor en el total
+                txtTotalCos.setText(String.valueOf(SubTotal));
+                calculoTotal();
             }
             tablaCos.setModel(costura);
             for (int i = 0; i < cabecera.length; i++) {
@@ -1614,6 +1707,10 @@ public void asignarAutocompletadoMaquila2() {
                 BigDecimal SubTotal = BigDecimal.valueOf(resultado);
                 SubTotal = SubTotal.setScale(2, RoundingMode.HALF_UP);
                 txtSubManipulacion2.setText(String.valueOf(SubTotal));
+                
+                //asignamos el valor en el total
+                txtTotalIny.setText(String.valueOf(SubTotal));
+                calculoTotal();
             }
             tablaIny.setModel(inyeccion);
             for (int i = 0; i < cabecera.length; i++) {
@@ -1652,6 +1749,7 @@ public void asignarAutocompletadoMaquila2() {
         return txtResultado;
     }
     
+
     public String redondeoIny() {
         Double par = Double.parseDouble(txtParIny.getText());
         Double precio = Double.parseDouble(txtPrecioIny.getText());
@@ -1707,7 +1805,6 @@ public void asignarAutocompletadoMaquila2() {
                     btnIntegrar.setEnabled(true);
                     btnIntegrarCostura.setEnabled(true);
                     btnIntegrarInyeccion.setEnabled(true);
-                    btnIntegrarTotal.setEnabled(true);
                     btnImagen.setEnabled(true);
                     chkActivo.setEnabled(false);
                     txtSubManipulacion.setEnabled(false);
@@ -2261,6 +2358,15 @@ public void asignarAutocompletadoMaquila2() {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTotalCosActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       // recalculamos todo
+       calculoTotal();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txtCostoFabricacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCostoFabricacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCostoFabricacionActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2323,6 +2429,7 @@ public void asignarAutocompletadoMaquila2() {
     private javax.swing.JButton btnNuevaMaquila2;
     private javax.swing.JCheckBox chkActivo;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2351,7 +2458,6 @@ public void asignarAutocompletadoMaquila2() {
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -2372,28 +2478,25 @@ public void asignarAutocompletadoMaquila2() {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTabbedPane panel;
     private javax.swing.JTable tablaCos;
     private javax.swing.JTable tablaIny;
     private javax.swing.JTable tablaMan;
     private javax.swing.JTextField txtArticulo;
     private javax.swing.JTextField txtColor;
+    private javax.swing.JTextField txtCostoFabricacion;
+    private javax.swing.JTextField txtGastosInd;
     private javax.swing.JTextField txtLinea;
     private javax.swing.JTextField txtMaqIny;
     private javax.swing.JTextField txtMaquila;
     private javax.swing.JTextField txtMaquila1;
     private javax.swing.JTextField txtMaquila2;
+    private javax.swing.JTextField txtMerma;
     private javax.swing.JTextField txtModelo;
     private javax.swing.JTextField txtPar;
     private javax.swing.JTextField txtParCost;
     private javax.swing.JTextField txtParIny;
+    private javax.swing.JTextField txtPorcentaje;
     private javax.swing.JTextField txtPrecio;
     private javax.swing.JTextField txtPrecio1;
     private javax.swing.JTextField txtPrecioCost;
@@ -2402,12 +2505,16 @@ public void asignarAutocompletadoMaquila2() {
     private javax.swing.JTextField txtPredecible;
     private javax.swing.JTextField txtPredecible1;
     private javax.swing.JTextField txtPredecible2;
+    private javax.swing.JTextField txtSalariosInyeccion;
     private javax.swing.JTextField txtSubManipulacion;
     private javax.swing.JTextField txtSubManipulacion1;
     private javax.swing.JTextField txtSubManipulacion2;
     private javax.swing.JTextField txtSubManipulacion3;
+    private javax.swing.JTextField txtSubTotal;
+    private javax.swing.JLabel txtTotal;
     private javax.swing.JTextField txtTotalCos;
     private javax.swing.JTextField txtTotalIny;
     private javax.swing.JTextField txtTotalMan;
+    private javax.swing.JTextField txtUtilidad;
     // End of variables declaration//GEN-END:variables
 }
