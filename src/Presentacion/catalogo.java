@@ -2,6 +2,8 @@ package Presentacion;
 
 import Logica.conexion;
 import com.mxrck.autocompleter.TextAutoCompleter;
+import java.awt.Image;
+import java.awt.image.ImageFilter;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Connection;
@@ -10,7 +12,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 public class catalogo extends javax.swing.JFrame {
@@ -37,7 +42,7 @@ public class catalogo extends javax.swing.JFrame {
         btnIntegrarCostura.setEnabled(false);
         btnIntegrarInyeccion.setEnabled(false);
         btnImagen.setEnabled(false);
-        
+
         //desactivamos los campos que no se podran tocar
         txtSubManipulacion.setEnabled(false);
         txtSubManipulacion1.setEnabled(false);
@@ -48,7 +53,7 @@ public class catalogo extends javax.swing.JFrame {
         txtSubTotal.setEnabled(false);
         txtCostoFabricacion.setEnabled(false);
         txtUtilidad.setEnabled(false);
-        
+
     }
 
     // iniciamos autocompletado de los 3 campos dobles
@@ -95,7 +100,7 @@ public class catalogo extends javax.swing.JFrame {
         }
 
     }
-    
+
     public void asignarAutocompletado1() {
         TextAutoCompleter textAutoCompleter = new TextAutoCompleter(txtPredecible1);
         textAutoCompleter.setMode(0); // infijo
@@ -117,7 +122,7 @@ public class catalogo extends javax.swing.JFrame {
         }
 
     }
-    
+
     public void asignarAutocompletado2() {
         TextAutoCompleter textAutoCompleter = new TextAutoCompleter(txtPredecible2);
         textAutoCompleter.setMode(0); // infijo
@@ -139,7 +144,8 @@ public class catalogo extends javax.swing.JFrame {
         }
 
     }
-public void asignarAutocompletadoMaquila1() {
+
+    public void asignarAutocompletadoMaquila1() {
         TextAutoCompleter textAutoCompleter = new TextAutoCompleter(txtMaquila1);
         textAutoCompleter.setMode(0); // infijo
         textAutoCompleter.setCaseSensitive(false); //No sensible a mayúsculas
@@ -160,7 +166,8 @@ public void asignarAutocompletadoMaquila1() {
         }
 
     }
-public void asignarAutocompletadoMaquila2() {
+
+    public void asignarAutocompletadoMaquila2() {
         TextAutoCompleter textAutoCompleter = new TextAutoCompleter(txtMaquila2);
         textAutoCompleter.setMode(0); // infijo
         textAutoCompleter.setCaseSensitive(false); //No sensible a mayúsculas
@@ -181,6 +188,7 @@ public void asignarAutocompletadoMaquila2() {
         }
 
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -301,6 +309,7 @@ public void asignarAutocompletadoMaquila2() {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
+        imgCalzado = new javax.swing.JLabel();
         btnImagen = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1216,19 +1225,32 @@ public void asignarAutocompletadoMaquila2() {
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Imagen"));
 
+        imgCalzado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 324, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addComponent(imgCalzado, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 180, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(imgCalzado, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         btnImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Graficos/imagen.png"))); // NOI18N
         btnImagen.setText("Actualizar Imagen");
+        btnImagen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImagenActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1263,15 +1285,13 @@ public void asignarAutocompletadoMaquila2() {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void integraTabla(String proceso){
-       
+    public void integraTabla(String proceso) {
+
     }
     private void btnIntegrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIntegrarActionPerformed
-        
-        // preparamos la funcion de integracion a "manipulacion"        
-       
-        //verificamos si es maquila o inventario a integrar el modelo
 
+        // preparamos la funcion de integracion a "manipulacion"        
+        //verificamos si es maquila o inventario a integrar el modelo
         //checamos que no tengan ambos campos con texto
         if (txtPredecible.getText().length() > 1 && txtMaquila.getText().length() > 1) {
             JOptionPane.showMessageDialog(this, "Solo integra un elemento a la vez");
@@ -1296,11 +1316,11 @@ public void asignarAutocompletadoMaquila2() {
                 Logger.getLogger(frminventario.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (contador == 1) {
-                //revisamos que no este repetido el material en el calzado
+                //revisamos que no este repetido el material en el especificacion
 
                 int material = 0;
                 try {
-                    String checar = "SELECT * FROM calzado WHERE nombre='" + txtPredecible.getText() + "' and modelo='"
+                    String checar = "SELECT * FROM especificacion WHERE nombre='" + txtPredecible.getText() + "' and modelo='"
                             + txtModelo.getText() + "' and articulo='" + txtArticulo.getText() + "'";
                     Statement repetido;
                     repetido = cn.createStatement();
@@ -1354,10 +1374,10 @@ public void asignarAutocompletadoMaquila2() {
                             System.out.println("Sin poder ejecutar el query para asignar valores");
                         }
 
-                        //ya teniendo todos los valores integramos la especificacion a la BD calzado
+                        //ya teniendo todos los valores integramos la especificacion a la BD especificacion
                         try {
                             Statement stmt = cn.createStatement();
-                            String grabar = "INSERT INTO calzado (modelo,codigo,linea,articulo,color,pieza,nombre,medida,consumo,precio,resultado,estado,proceso) "
+                            String grabar = "INSERT INTO especificacion (modelo,codigo,linea,articulo,color,pieza,nombre,medida,consumo,precio,resultado,estado,proceso) "
                                     + "VALUES ('"
                                     + Modelo + "','"
                                     + Codigo + "','"
@@ -1381,18 +1401,18 @@ public void asignarAutocompletadoMaquila2() {
                         }
 
                     }
-                    
+
                 }
-            }if (contador == 0) {
-                        JOptionPane.showMessageDialog(this, "No modifiques la ventana de materiales");
-                        txtPredecible.setText("");
-                        txtPar.setText("");
-                        txtPrecio.setText("");
-                    }
-        } else if (txtMaquila.getText().length()>0){
+            }
+            if (contador == 0) {
+                JOptionPane.showMessageDialog(this, "No modifiques la ventana de materiales");
+                txtPredecible.setText("");
+                txtPar.setText("");
+                txtPrecio.setText("");
+            }
+        } else if (txtMaquila.getText().length() > 0) {
             // ********** Inicia Captura de Maquila
-            
-            
+
             //primero verificamos que si este en la base de datos de maquila
             int contador = 0;
             try {
@@ -1408,11 +1428,11 @@ public void asignarAutocompletadoMaquila2() {
                 Logger.getLogger(frminventario.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (contador == 1) {
-                //revisamos que no este repetido la maquila en el calzado
+                //revisamos que no este repetido la maquila en el especificacion
 
                 int maquila = 0;
                 try {
-                    String checar = "SELECT * FROM calzado WHERE nombre='" + txtMaquila.getText() + "' and modelo='"
+                    String checar = "SELECT * FROM especificacion WHERE nombre='" + txtMaquila.getText() + "' and modelo='"
                             + txtModelo.getText() + "' and articulo='" + txtArticulo.getText() + "'";
                     Statement repetido;
                     repetido = cn.createStatement();
@@ -1461,10 +1481,10 @@ public void asignarAutocompletadoMaquila2() {
                             System.out.println("Sin poder ejecutar el query para asignar valores de maquila");
                         }
 
-                        //ya teniendo todos los valores integramos la especificacion a la BD calzado
+                        //ya teniendo todos los valores integramos la especificacion a la BD especificacion
                         try {
                             Statement stmt = cn.createStatement();
-                            String grabar = "INSERT INTO calzado (modelo,codigo,linea,articulo,color,pieza,nombre,precio,resultado,estado,proceso) "
+                            String grabar = "INSERT INTO especificacion (modelo,codigo,linea,articulo,color,pieza,nombre,precio,resultado,estado,proceso) "
                                     + "VALUES ('"
                                     + Modelo + "','"
                                     + Codigo + "','"
@@ -1488,24 +1508,24 @@ public void asignarAutocompletadoMaquila2() {
                         }
 
                     }
-                    
+
                 }
-            }if (contador == 0) {
-                        JOptionPane.showMessageDialog(this, "No modifiques la ventana de maquila");
-                        txtPredecible.setText("");
-                        txtPar.setText("");
-                        txtPrecio.setText("");
-                    }
-            
-            
+            }
+            if (contador == 0) {
+                JOptionPane.showMessageDialog(this, "No modifiques la ventana de maquila");
+                txtPredecible.setText("");
+                txtPar.setText("");
+                txtPrecio.setText("");
+            }
+
             // ********** Termina captura de maquila
         }
 
-        
+
     }//GEN-LAST:event_btnIntegrarActionPerformed
 
     public void mostrarTabla(String parametro) {
-        String sql = "SELECT * FROM CALZADO where modelo='" + txtModelo.getText() + "' AND proceso='"+parametro+"' AND articulo='"
+        String sql = "SELECT * FROM CALZADO where modelo='" + txtModelo.getText() + "' AND proceso='" + parametro + "' AND articulo='"
                 + txtArticulo.getText() + "'";
         String[] cabecera = {"Codigo", "Pieza", "Nombre", "Medida", "Consumo", "Precio", "total"};
         // se definen los registros que llevara la tabla
@@ -1558,61 +1578,61 @@ public void asignarAutocompletadoMaquila2() {
         }
 
     }
-    
-    /// Calculamos el valor total del calzado
-    public void calculoTotal(){
+
+    /// Calculamos el valor total del especificacion
+    public void calculoTotal() {
         //asignamos variables
-        Double totalManipulacion=0.00;
-        Double totalCostura=0.00;
-        Double totalInyeccion=0.00;
-        Double salariosInyeccion=0.00;
-        Double total=0.00;
-        Double subTotal=0.00;
-        Double costosFabricacion=0.00;
-        Double gastosIndirectos=0.00;
-        Double porcentaje=0.00;
-        Double utilidad=0.00;
-        Double merma=0.00;
-        
+        Double totalManipulacion = 0.00;
+        Double totalCostura = 0.00;
+        Double totalInyeccion = 0.00;
+        Double salariosInyeccion = 0.00;
+        Double total = 0.00;
+        Double subTotal = 0.00;
+        Double costosFabricacion = 0.00;
+        Double gastosIndirectos = 0.00;
+        Double porcentaje = 0.00;
+        Double utilidad = 0.00;
+        Double merma = 0.00;
+
         //convertimos strings a doubles
-        totalManipulacion=Double.valueOf(txtTotalMan.getText());
-        totalCostura=Double.valueOf(txtTotalCos.getText());
-        totalInyeccion=Double.valueOf(txtTotalIny.getText());
-        salariosInyeccion=Double.valueOf(txtSalariosInyeccion.getText());
-        gastosIndirectos=Double.valueOf(txtGastosInd.getText());
-        porcentaje=Double.valueOf(txtPorcentaje.getText());
-        merma=Double.valueOf(txtMerma.getText());
+        totalManipulacion = Double.valueOf(txtTotalMan.getText());
+        totalCostura = Double.valueOf(txtTotalCos.getText());
+        totalInyeccion = Double.valueOf(txtTotalIny.getText());
+        salariosInyeccion = Double.valueOf(txtSalariosInyeccion.getText());
+        gastosIndirectos = Double.valueOf(txtGastosInd.getText());
+        porcentaje = Double.valueOf(txtPorcentaje.getText());
+        merma = Double.valueOf(txtMerma.getText());
 
         //hacemos los calculos
-        subTotal=totalManipulacion+totalCostura+totalInyeccion+salariosInyeccion;
-        
-        costosFabricacion=subTotal+gastosIndirectos;
-        utilidad=costosFabricacion*porcentaje/100;
-        total=costosFabricacion+utilidad+merma;
+        subTotal = totalManipulacion + totalCostura + totalInyeccion + salariosInyeccion;
+
+        costosFabricacion = subTotal + gastosIndirectos;
+        utilidad = costosFabricacion * porcentaje / 100;
+        total = costosFabricacion + utilidad + merma;
         // redondeamos subtotal
         BigDecimal subtotal = BigDecimal.valueOf(subTotal);
         subtotal = subtotal.setScale(2, RoundingMode.HALF_UP);
-        
+
         // redondeamos costosFabricacion
         BigDecimal costosfabricacion = BigDecimal.valueOf(costosFabricacion);
         costosfabricacion = costosfabricacion.setScale(2, RoundingMode.HALF_UP);
-        
+
         // redondeamos utilidad
         BigDecimal Utilidad = BigDecimal.valueOf(utilidad);
         Utilidad = Utilidad.setScale(2, RoundingMode.HALF_UP);
-        
+
         // redondeamos total
         BigDecimal Total = BigDecimal.valueOf(total);
         Total = Total.setScale(2, RoundingMode.HALF_UP);
-        
+
         //colocamos los valores
         txtSubTotal.setText(String.valueOf(subtotal));
         txtCostoFabricacion.setText(String.valueOf(costosfabricacion));
         txtUtilidad.setText(String.valueOf(Utilidad));
         txtTotal.setText(String.valueOf(Total));
     }
-    
-        public void mostrarTablaCost() {
+
+    public void mostrarTablaCost() {
         String sql = "SELECT * FROM CALZADO where modelo='" + txtModelo.getText() + "' AND proceso='costura' AND articulo='"
                 + txtArticulo.getText() + "'";
         String[] cabecera = {"Codigo", "Pieza", "Nombre", "Medida", "Consumo", "Precio", "total"};
@@ -1648,7 +1668,7 @@ public void asignarAutocompletadoMaquila2() {
                 BigDecimal SubTotal = BigDecimal.valueOf(resultado);
                 SubTotal = SubTotal.setScale(2, RoundingMode.HALF_UP);
                 txtSubManipulacion1.setText(String.valueOf(SubTotal));
-                
+
                 //asignamos el valor en el total
                 txtTotalCos.setText(String.valueOf(SubTotal));
                 calculoTotal();
@@ -1657,21 +1677,21 @@ public void asignarAutocompletadoMaquila2() {
             for (int i = 0; i < cabecera.length; i++) {
                 tablaCos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
                 tablaCos.setFont(new java.awt.Font("Tahoma", 0, 12));
-                
+
             }
-                txtPredecible1.setText("");
-                txtParCost.setText("");
-                txtPrecioCost.setText("");
-                txtPrecioMaqCost.setText("");
+            txtPredecible1.setText("");
+            txtParCost.setText("");
+            txtPrecioCost.setText("");
+            txtPrecioMaqCost.setText("");
 
         } catch (SQLException ex) {
             System.out.println("Sin poder ejecutar el query a la tabla");
         }
 
     }
-        
-        //tabla de inyeccion
-        public void mostrarTablaIny() {
+
+    //tabla de inyeccion
+    public void mostrarTablaIny() {
         String sql = "SELECT * FROM CALZADO where modelo='" + txtModelo.getText() + "' AND proceso='inyeccion' AND articulo='"
                 + txtArticulo.getText() + "'";
         String[] cabecera = {"Codigo", "Pieza", "Nombre", "Medida", "Consumo", "Precio", "total"};
@@ -1707,7 +1727,7 @@ public void asignarAutocompletadoMaquila2() {
                 BigDecimal SubTotal = BigDecimal.valueOf(resultado);
                 SubTotal = SubTotal.setScale(2, RoundingMode.HALF_UP);
                 txtSubManipulacion2.setText(String.valueOf(SubTotal));
-                
+
                 //asignamos el valor en el total
                 txtTotalIny.setText(String.valueOf(SubTotal));
                 calculoTotal();
@@ -1716,12 +1736,12 @@ public void asignarAutocompletadoMaquila2() {
             for (int i = 0; i < cabecera.length; i++) {
                 tablaIny.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
                 tablaIny.setFont(new java.awt.Font("Tahoma", 0, 12));
-                
+
             }
-                txtPredecible2.setText("");
-                txtParIny.setText("");
-                txtPrecioIny.setText("");
-                txtMaqIny.setText("");
+            txtPredecible2.setText("");
+            txtParIny.setText("");
+            txtPrecioIny.setText("");
+            txtMaqIny.setText("");
 
         } catch (SQLException ex) {
             System.out.println("Sin poder ejecutar el query a la tabla");
@@ -1738,7 +1758,7 @@ public void asignarAutocompletadoMaquila2() {
         String txtResultado = resultado.toString();
         return txtResultado;
     }
-    
+
     public String redondeoCost() {
         Double par = Double.parseDouble(txtParCost.getText());
         Double precio = Double.parseDouble(txtPrecioCost.getText());
@@ -1748,7 +1768,6 @@ public void asignarAutocompletadoMaquila2() {
         String txtResultado = resultado.toString();
         return txtResultado;
     }
-    
 
     public String redondeoIny() {
         Double par = Double.parseDouble(txtParIny.getText());
@@ -1775,7 +1794,7 @@ public void asignarAutocompletadoMaquila2() {
             //verificamos que el modelo no exista previamente
             int repetido = 0;
             try {
-                String checar = "SELECT * FROM calzado WHERE articulo='" + txtArticulo.getText()
+                String checar = "SELECT * FROM especificacion WHERE articulo='" + txtArticulo.getText()
                         + "' and linea='" + txtLinea.getText() + "'";
                 Statement verificar;
                 verificar = cn.createStatement();
@@ -1809,6 +1828,11 @@ public void asignarAutocompletadoMaquila2() {
                     chkActivo.setEnabled(false);
                     txtSubManipulacion.setEnabled(false);
                     txtSubManipulacion.setText("0.00");
+
+                    // creamos la imagen de default del calzado
+                    ImageIcon imagenCalzado = new ImageIcon(getClass().getResource("/Graficos/imgCalzado.png"));
+                    imgCalzado.setIcon(imagenCalzado);
+
                 } else {
                     //si se cancela la creacion de zapata dejamos limpio todo
                     txtLinea.setText("");
@@ -1846,9 +1870,8 @@ public void asignarAutocompletadoMaquila2() {
 
     private void btnIntegrarCosturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIntegrarCosturaActionPerformed
         // preparamos la funcion de integracion a "Costura"
-               
-        //verificamos si es maquila o inventario a integrar el modelo
 
+        //verificamos si es maquila o inventario a integrar el modelo
         //checamos que no tengan ambos campos con texto
         if (txtPredecible1.getText().length() > 1 && txtMaquila1.getText().length() > 1) {
             JOptionPane.showMessageDialog(this, "Solo integra un elemento a la vez");
@@ -1877,7 +1900,7 @@ public void asignarAutocompletadoMaquila2() {
 
                 int material = 0;
                 try {
-                    String checar = "SELECT * FROM calzado WHERE nombre='" + txtPredecible1.getText() + "' and modelo='"
+                    String checar = "SELECT * FROM especificacion WHERE nombre='" + txtPredecible1.getText() + "' and modelo='"
                             + txtModelo.getText() + "' and articulo='" + txtArticulo.getText() + "'";
                     Statement repetido;
                     repetido = cn.createStatement();
@@ -1934,7 +1957,7 @@ public void asignarAutocompletadoMaquila2() {
                         //ya teniendo todos los valores integramos la especificacion a la BD calzado
                         try {
                             Statement stmt = cn.createStatement();
-                            String grabar = "INSERT INTO calzado (modelo,codigo,linea,articulo,color,pieza,nombre,medida,consumo,precio,resultado,estado,proceso) "
+                            String grabar = "INSERT INTO especificacion (modelo,codigo,linea,articulo,color,pieza,nombre,medida,consumo,precio,resultado,estado,proceso) "
                                     + "VALUES ('"
                                     + Modelo + "','"
                                     + Codigo + "','"
@@ -1958,18 +1981,18 @@ public void asignarAutocompletadoMaquila2() {
                         }
 
                     }
-                    
+
                 }
-            }if (contador == 0) {
-                        JOptionPane.showMessageDialog(this, "No modifiques la ventana de materiales");
-                        txtPredecible1.setText("");
-                        txtParCost.setText("");
-                        txtPrecioCost.setText("");
-                    }
-        } else if (txtMaquila1.getText().length()>0){
+            }
+            if (contador == 0) {
+                JOptionPane.showMessageDialog(this, "No modifiques la ventana de materiales");
+                txtPredecible1.setText("");
+                txtParCost.setText("");
+                txtPrecioCost.setText("");
+            }
+        } else if (txtMaquila1.getText().length() > 0) {
             // ********** Inicia Captura de Maquila
-            
-            
+
             //primero verificamos que si este en la base de datos de maquila
             int contador = 0;
             try {
@@ -1989,7 +2012,7 @@ public void asignarAutocompletadoMaquila2() {
 
                 int maquila = 0;
                 try {
-                    String checar = "SELECT * FROM calzado WHERE nombre='" + txtMaquila1.getText() + "' and modelo='"
+                    String checar = "SELECT * FROM especificacion WHERE nombre='" + txtMaquila1.getText() + "' and modelo='"
                             + txtModelo.getText() + "' and articulo='" + txtArticulo.getText() + "'";
                     Statement repetido;
                     repetido = cn.createStatement();
@@ -2041,7 +2064,7 @@ public void asignarAutocompletadoMaquila2() {
                         //ya teniendo todos los valores integramos la especificacion a la BD calzado
                         try {
                             Statement stmt = cn.createStatement();
-                            String grabar = "INSERT INTO calzado (modelo,codigo,linea,articulo,color,pieza,nombre,precio,resultado,estado,proceso) "
+                            String grabar = "INSERT INTO especificacion (modelo,codigo,linea,articulo,color,pieza,nombre,precio,resultado,estado,proceso) "
                                     + "VALUES ('"
                                     + Modelo + "','"
                                     + Codigo + "','"
@@ -2065,16 +2088,16 @@ public void asignarAutocompletadoMaquila2() {
                         }
 
                     }
-                    
+
                 }
-            }if (contador == 0) {
-                        JOptionPane.showMessageDialog(this, "No modifiques la ventana de maquila");
-                        txtPredecible1.setText("");
-                        txtParCost.setText("");
-                        txtPrecioMaqCost.setText("");
-                    }
-            
-            
+            }
+            if (contador == 0) {
+                JOptionPane.showMessageDialog(this, "No modifiques la ventana de maquila");
+                txtPredecible1.setText("");
+                txtParCost.setText("");
+                txtPrecioMaqCost.setText("");
+            }
+
             // ********** Termina captura de maquila
         }
     }//GEN-LAST:event_btnIntegrarCosturaActionPerformed
@@ -2101,9 +2124,8 @@ public void asignarAutocompletadoMaquila2() {
 
     private void btnIntegrarInyeccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIntegrarInyeccionActionPerformed
         // preparamos la funcion de integracion a "Inyeccion"
-        
-        //verificamos si es maquila o inventario a integrar el modelo
 
+        //verificamos si es maquila o inventario a integrar el modelo
         //checamos que no tengan ambos campos con texto
         if (txtPredecible2.getText().length() > 1 && txtMaquila2.getText().length() > 1) {
             JOptionPane.showMessageDialog(this, "Solo integra un elemento a la vez");
@@ -2128,11 +2150,11 @@ public void asignarAutocompletadoMaquila2() {
                 Logger.getLogger(frminventario.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (contador == 1) {
-                //revisamos que no este repetido el material en el calzado
+                //revisamos que no este repetido el material en el especificacion
 
                 int material = 0;
                 try {
-                    String checar = "SELECT * FROM calzado WHERE nombre='" + txtPredecible2.getText() + "' and modelo='"
+                    String checar = "SELECT * FROM especificacion WHERE nombre='" + txtPredecible2.getText() + "' and modelo='"
                             + txtModelo.getText() + "' and articulo='" + txtArticulo.getText() + "'";
                     Statement repetido;
                     repetido = cn.createStatement();
@@ -2189,7 +2211,7 @@ public void asignarAutocompletadoMaquila2() {
                         //ya teniendo todos los valores integramos la especificacion a la BD calzado
                         try {
                             Statement stmt = cn.createStatement();
-                            String grabar = "INSERT INTO calzado (modelo,codigo,linea,articulo,color,pieza,nombre,medida,consumo,precio,resultado,estado,proceso) "
+                            String grabar = "INSERT INTO especificacion (modelo,codigo,linea,articulo,color,pieza,nombre,medida,consumo,precio,resultado,estado,proceso) "
                                     + "VALUES ('"
                                     + Modelo + "','"
                                     + Codigo + "','"
@@ -2213,18 +2235,18 @@ public void asignarAutocompletadoMaquila2() {
                         }
 
                     }
-                    
+
                 }
-            }if (contador == 0) {
-                        JOptionPane.showMessageDialog(this, "No modifiques la ventana de materiales");
-                        txtPredecible2.setText("");
-                        txtParIny.setText("");
-                        txtPrecioIny.setText("");
-                    }
-        } else if (txtMaquila2.getText().length()>0){
+            }
+            if (contador == 0) {
+                JOptionPane.showMessageDialog(this, "No modifiques la ventana de materiales");
+                txtPredecible2.setText("");
+                txtParIny.setText("");
+                txtPrecioIny.setText("");
+            }
+        } else if (txtMaquila2.getText().length() > 0) {
             // ********** Inicia Captura de Maquila
-            
-            
+
             //primero verificamos que si este en la base de datos de maquila
             int contador = 0;
             try {
@@ -2244,7 +2266,7 @@ public void asignarAutocompletadoMaquila2() {
 
                 int maquila = 0;
                 try {
-                    String checar = "SELECT * FROM calzado WHERE nombre='" + txtMaquila2.getText() + "' and modelo='"
+                    String checar = "SELECT * FROM especificacion WHERE nombre='" + txtMaquila2.getText() + "' and modelo='"
                             + txtModelo.getText() + "' and articulo='" + txtArticulo.getText() + "'";
                     Statement repetido;
                     repetido = cn.createStatement();
@@ -2293,10 +2315,10 @@ public void asignarAutocompletadoMaquila2() {
                             System.out.println("Sin poder ejecutar el query para asignar valores de maquila");
                         }
 
-                        //ya teniendo todos los valores integramos la especificacion a la BD calzado
+                        //ya teniendo todos los valores integramos la especificacion a la BD especificacion
                         try {
                             Statement stmt = cn.createStatement();
-                            String grabar = "INSERT INTO calzado (modelo,codigo,linea,articulo,color,pieza,nombre,precio,resultado,estado,proceso) "
+                            String grabar = "INSERT INTO especificacion (modelo,codigo,linea,articulo,color,pieza,nombre,precio,resultado,estado,proceso) "
                                     + "VALUES ('"
                                     + Modelo + "','"
                                     + Codigo + "','"
@@ -2320,16 +2342,16 @@ public void asignarAutocompletadoMaquila2() {
                         }
 
                     }
-                    
+
                 }
-            }if (contador == 0) {
-                        JOptionPane.showMessageDialog(this, "No modifiques la ventana de maquila");
-                        txtPredecible2.setText("");
-                        txtParIny.setText("");
-                        txtMaqIny.setText("");
-                    }
-            
-            
+            }
+            if (contador == 0) {
+                JOptionPane.showMessageDialog(this, "No modifiques la ventana de maquila");
+                txtPredecible2.setText("");
+                txtParIny.setText("");
+                txtMaqIny.setText("");
+            }
+
             // ********** Termina captura de maquila
         }
     }//GEN-LAST:event_btnIntegrarInyeccionActionPerformed
@@ -2359,13 +2381,59 @@ public void asignarAutocompletadoMaquila2() {
     }//GEN-LAST:event_txtTotalCosActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       // recalculamos todo
-       calculoTotal();
+        // recalculamos todo
+        calculoTotal();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void txtCostoFabricacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCostoFabricacionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCostoFabricacionActionPerformed
+
+    private void btnImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImagenActionPerformed
+        // menu de introduccion de una Imagen
+        //Creamos selector de apertura
+        
+        // iniciamos de nuevo
+        JFileChooser seleccion= new JFileChooser();
+        int opcion=seleccion.showOpenDialog(this);
+        if (opcion==JFileChooser.APPROVE_OPTION){
+            String ruta=seleccion.getSelectedFile().getPath();
+            System.out.println (ruta);
+            ImageIcon imagenCalzado= new ImageIcon(getClass().getResource(ruta));
+            imgCalzado.setIcon(imagenCalzado);
+        }
+        
+        
+        /*JFileChooser chooser = new JFileChooser();
+        chooser.setCurrentDirectory(new java.io.File("."));
+        //Titulo que llevara la ventana
+        chooser.setDialogTitle("Selecciona la imagen del Calzado");
+        //Elegiremos archivos del directorio
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        chooser.setAcceptAllFileFilterUsed(false);
+        //Creamos el filtro
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.JPG", "jpg","*.PNG","png");
+
+        //Le indicamos el filtro
+        chooser.setFileFilter(filtro);
+        //Si seleccionamos algún archivo retornaremos su directorio
+        if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            System.out.println("Archivo: " + chooser.getSelectedFile().getPath());
+            //direccion absoluta
+            String direccion = System.getProperty("user.dir");
+            System.out.println(direccion);
+            ImageIcon imagen = new ImageIcon(getClass().getResource(chooser.getSelectedFile().getPath()));
+            //ImageIcon imagenCalzado = new ImageIcon(getClass().getResource("/Graficos/imgCalzado.png"));
+            Image conversion =imagen.getImage();
+            Image escala = conversion.getScaledInstance(260, 165, Image.SCALE_SMOOTH);
+            ImageIcon calzado= new ImageIcon(escala);
+            imgCalzado.setIcon(calzado);
+            
+        } else {
+            System.out.println("No seleccion ");
+        }
+    */
+    }//GEN-LAST:event_btnImagenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2428,6 +2496,7 @@ public void asignarAutocompletadoMaquila2() {
     private javax.swing.JButton btnNuevaMaquila1;
     private javax.swing.JButton btnNuevaMaquila2;
     private javax.swing.JCheckBox chkActivo;
+    private javax.swing.JLabel imgCalzado;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
