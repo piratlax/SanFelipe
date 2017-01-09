@@ -4,8 +4,10 @@ import Logica.conexion;
 import com.mxrck.autocompleter.TextAutoCompleter;
 import java.awt.Image;
 import java.awt.image.ImageFilter;
+import java.io.File;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -2397,10 +2399,18 @@ public class catalogo extends javax.swing.JFrame {
         JFileChooser seleccion= new JFileChooser();
         int opcion=seleccion.showOpenDialog(this);
         if (opcion==JFileChooser.APPROVE_OPTION){
-            String ruta=seleccion.getSelectedFile().getPath();
+           
+            File file = seleccion.getSelectedFile();
+            ImageIcon icon = new ImageIcon(file.getPath());
+            imgCalzado.setIcon(icon);
+            // label = new JLabel(icon);
+
+            /* String ruta=seleccion.getSelectedFile().getPath();
             System.out.println (ruta);
-            ImageIcon imagenCalzado= new ImageIcon(getClass().getResource(ruta));
+            URL url = this.getClass().getResource(ruta);
+            ImageIcon imagenCalzado= new ImageIcon(url);
             imgCalzado.setIcon(imagenCalzado);
+            */
         }
         
         
