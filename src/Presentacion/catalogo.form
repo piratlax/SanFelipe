@@ -951,7 +951,7 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="txtPar2" min="-2" pref="58" max="-2" attributes="0"/>
+                                          <Component id="txtParIny" min="-2" pref="58" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="btnNuevaMaquila2" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -960,12 +960,12 @@
                                       <Group type="102" alignment="1" attributes="0">
                                           <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="txtPrecio5" min="-2" pref="75" max="-2" attributes="0"/>
+                                          <Component id="txtMaqIny" min="-2" pref="75" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
                                           <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="txtPrecio4" min="-2" pref="75" max="-2" attributes="0"/>
+                                          <Component id="txtPrecioIny" min="-2" pref="75" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -1002,18 +1002,18 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="3" attributes="0">
                                               <Component id="jLabel19" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="txtPrecio4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txtPrecioIny" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
                                               <Component id="jLabel22" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="txtPrecio5" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txtMaqIny" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="3" attributes="0">
                                               <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="txtPar2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txtParIny" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="btnNuevaMaquila2" min="-2" max="-2" attributes="0"/>
@@ -1062,7 +1062,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="tablaMan2">
+                    <Component class="javax.swing.JTable" name="tablaIny">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="7" rowCount="4">
@@ -1136,16 +1136,16 @@
                     <Property name="text" type="java.lang.String" value="Consumo por par"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtPar2">
+                <Component class="javax.swing.JTextField" name="txtParIny">
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel19">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Precio"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtPrecio4">
+                <Component class="javax.swing.JTextField" name="txtPrecioIny">
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPrecio4ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPrecioInyActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel20">
@@ -1167,9 +1167,9 @@
                     <Property name="text" type="java.lang.String" value="Costo"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtPrecio5">
+                <Component class="javax.swing.JTextField" name="txtMaqIny">
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPrecio5ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtMaqInyActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnActMaquila2">
