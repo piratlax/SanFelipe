@@ -308,7 +308,7 @@ public class catalogo extends javax.swing.JFrame {
         jPanel11 = new javax.swing.JPanel();
         jLabel34 = new javax.swing.JLabel();
         txtTotal = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         imgCalzado = new javax.swing.JLabel();
@@ -1139,8 +1139,13 @@ public class catalogo extends javax.swing.JFrame {
                 .addContainerGap(49, Short.MAX_VALUE))
         );
 
-        jButton1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
-        jButton1.setText("GUARDAR");
+        btnGuardar.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
+        btnGuardar.setText("GUARDAR");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Calcular");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -1175,7 +1180,7 @@ public class catalogo extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addComponent(jButton2)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
@@ -1190,7 +1195,7 @@ public class catalogo extends javax.swing.JFrame {
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(77, 77, 77)
                         .addComponent(jButton2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
@@ -1259,7 +1264,7 @@ public class catalogo extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(8, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 882, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1276,7 +1281,7 @@ public class catalogo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnImagen)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -2394,58 +2399,59 @@ public class catalogo extends javax.swing.JFrame {
     private void btnImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImagenActionPerformed
         // menu de introduccion de una Imagen
         //Creamos selector de apertura
-        
+
         // iniciamos de nuevo
-        JFileChooser seleccion= new JFileChooser();
+        JFileChooser seleccion = new JFileChooser();
         //Titulo que llevara la ventana
         seleccion.setDialogTitle("Selecciona la imagen del Calzado");
         seleccion.setAcceptAllFileFilterUsed(false);
         //Creamos el filtro
-        FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.JPG", "jpg","*.PNG","png");
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.JPG", "jpg", "*.PNG", "png");
 
         //Le indicamos el filtro
         seleccion.setFileFilter(filtro);
-        int opcion=seleccion.showOpenDialog(this);
-        if (opcion==JFileChooser.APPROVE_OPTION){
-           
+        int opcion = seleccion.showOpenDialog(this);
+        if (opcion == JFileChooser.APPROVE_OPTION) {
+
             File file = seleccion.getSelectedFile();
             ImageIcon icon = new ImageIcon(file.getPath());
-            //imgCalzado.setIcon(icon);
-            Image conversion =icon.getImage();
+            Image conversion = icon.getImage();
             Image escala = conversion.getScaledInstance(260, 165, Image.SCALE_SMOOTH);
-            ImageIcon calzado= new ImageIcon(escala);
+            ImageIcon calzado = new ImageIcon(escala);
             imgCalzado.setIcon(calzado);
-            // label = new JLabel(icon);
+            
+            
+            FileInputStream fis = null;
+    PreparedStatement ps = null;
+    try {
+      conn.setAutoCommit(false);
+      File file = new File("myPhoto.png");
+      fis = new FileInputStream(file);
+      ps = conn.prepareStatement(INSERT_PICTURE);
+      ps.setString(1, "001");
+      ps.setString(2, "name");
+      ps.setBinaryStream(3, fis, (int) file.length());
+      ps.executeUpdate();
+      conn.commit();
+    } finally {
+      ps.close();
+      fis.close();
+            
+                 
 
-            /* String ruta=seleccion.getSelectedFile().getPath();
-            System.out.println (ruta);
-            URL url = this.getClass().getResource(ruta);
-            ImageIcon imagenCalzado= new ImageIcon(url);
-            imgCalzado.setIcon(imagenCalzado);
-            */
         }
-        
-        
-        /*JFileChooser chooser = new JFileChooser();
-        
-        //Elegiremos archivos del directorio
-        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        
-        //Si seleccionamos algún archivo retornaremos su directorio
-        if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-            System.out.println("Archivo: " + chooser.getSelectedFile().getPath());
-            //direccion absoluta
-            String direccion = System.getProperty("user.dir");
-            System.out.println(direccion);
-            ImageIcon imagen = new ImageIcon(getClass().getResource(chooser.getSelectedFile().getPath()));
-            //ImageIcon imagenCalzado = new ImageIcon(getClass().getResource("/Graficos/imgCalzado.png"));
-            
-            
-        } else {
-            System.out.println("No seleccion ");
-        }
-    */
+
+
     }//GEN-LAST:event_btnImagenActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+       //iniciamos el proceso de guardar la creacion del Calzado
+       
+       // pasamos la imagen de icono de label a formato imagen
+        ImageIcon icon = new ImageIcon((Image) imgCalzado.getIcon());
+            Image conversion = icon.getImage();
+            
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2500,6 +2506,7 @@ public class catalogo extends javax.swing.JFrame {
     private javax.swing.JButton btnBorrar3;
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnImagen;
     private javax.swing.JButton btnIntegrar;
     private javax.swing.JButton btnIntegrarCostura;
@@ -2509,7 +2516,6 @@ public class catalogo extends javax.swing.JFrame {
     private javax.swing.JButton btnNuevaMaquila2;
     private javax.swing.JCheckBox chkActivo;
     private javax.swing.JLabel imgCalzado;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
