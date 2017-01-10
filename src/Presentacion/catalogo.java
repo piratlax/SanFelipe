@@ -2397,12 +2397,24 @@ public class catalogo extends javax.swing.JFrame {
         
         // iniciamos de nuevo
         JFileChooser seleccion= new JFileChooser();
+        //Titulo que llevara la ventana
+        seleccion.setDialogTitle("Selecciona la imagen del Calzado");
+        seleccion.setAcceptAllFileFilterUsed(false);
+        //Creamos el filtro
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.JPG", "jpg","*.PNG","png");
+
+        //Le indicamos el filtro
+        seleccion.setFileFilter(filtro);
         int opcion=seleccion.showOpenDialog(this);
         if (opcion==JFileChooser.APPROVE_OPTION){
            
             File file = seleccion.getSelectedFile();
             ImageIcon icon = new ImageIcon(file.getPath());
-            imgCalzado.setIcon(icon);
+            //imgCalzado.setIcon(icon);
+            Image conversion =icon.getImage();
+            Image escala = conversion.getScaledInstance(260, 165, Image.SCALE_SMOOTH);
+            ImageIcon calzado= new ImageIcon(escala);
+            imgCalzado.setIcon(calzado);
             // label = new JLabel(icon);
 
             /* String ruta=seleccion.getSelectedFile().getPath();
@@ -2415,17 +2427,10 @@ public class catalogo extends javax.swing.JFrame {
         
         
         /*JFileChooser chooser = new JFileChooser();
-        chooser.setCurrentDirectory(new java.io.File("."));
-        //Titulo que llevara la ventana
-        chooser.setDialogTitle("Selecciona la imagen del Calzado");
+        
         //Elegiremos archivos del directorio
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        chooser.setAcceptAllFileFilterUsed(false);
-        //Creamos el filtro
-        FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.JPG", "jpg","*.PNG","png");
-
-        //Le indicamos el filtro
-        chooser.setFileFilter(filtro);
+        
         //Si seleccionamos algún archivo retornaremos su directorio
         if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
             System.out.println("Archivo: " + chooser.getSelectedFile().getPath());
@@ -2434,10 +2439,7 @@ public class catalogo extends javax.swing.JFrame {
             System.out.println(direccion);
             ImageIcon imagen = new ImageIcon(getClass().getResource(chooser.getSelectedFile().getPath()));
             //ImageIcon imagenCalzado = new ImageIcon(getClass().getResource("/Graficos/imgCalzado.png"));
-            Image conversion =imagen.getImage();
-            Image escala = conversion.getScaledInstance(260, 165, Image.SCALE_SMOOTH);
-            ImageIcon calzado= new ImageIcon(escala);
-            imgCalzado.setIcon(calzado);
+            
             
         } else {
             System.out.println("No seleccion ");
