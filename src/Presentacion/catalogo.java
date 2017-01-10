@@ -1532,7 +1532,7 @@ public class catalogo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIntegrarActionPerformed
 
     public void mostrarTabla(String parametro) {
-        String sql = "SELECT * FROM CALZADO where modelo='" + txtModelo.getText() + "' AND proceso='" + parametro + "' AND articulo='"
+        String sql = "SELECT * FROM especificacion where modelo='" + txtModelo.getText() + "' AND proceso='" + parametro + "' AND articulo='"
                 + txtArticulo.getText() + "'";
         String[] cabecera = {"Codigo", "Pieza", "Nombre", "Medida", "Consumo", "Precio", "total"};
         // se definen los registros que llevara la tabla
@@ -1640,7 +1640,7 @@ public class catalogo extends javax.swing.JFrame {
     }
 
     public void mostrarTablaCost() {
-        String sql = "SELECT * FROM CALZADO where modelo='" + txtModelo.getText() + "' AND proceso='costura' AND articulo='"
+        String sql = "SELECT * FROM especificacion where modelo='" + txtModelo.getText() + "' AND proceso='costura' AND articulo='"
                 + txtArticulo.getText() + "'";
         String[] cabecera = {"Codigo", "Pieza", "Nombre", "Medida", "Consumo", "Precio", "total"};
         // se definen los registros que llevara la tabla
@@ -1699,7 +1699,7 @@ public class catalogo extends javax.swing.JFrame {
 
     //tabla de inyeccion
     public void mostrarTablaIny() {
-        String sql = "SELECT * FROM CALZADO where modelo='" + txtModelo.getText() + "' AND proceso='inyeccion' AND articulo='"
+        String sql = "SELECT * FROM especificacion where modelo='" + txtModelo.getText() + "' AND proceso='inyeccion' AND articulo='"
                 + txtArticulo.getText() + "'";
         String[] cabecera = {"Codigo", "Pieza", "Nombre", "Medida", "Consumo", "Precio", "total"};
         // se definen los registros que llevara la tabla
@@ -2420,7 +2420,7 @@ public class catalogo extends javax.swing.JFrame {
             ImageIcon calzado = new ImageIcon(escala);
             imgCalzado.setIcon(calzado);
             
-            
+            /*
             FileInputStream fis = null;
     PreparedStatement ps = null;
     try {
@@ -2436,7 +2436,7 @@ public class catalogo extends javax.swing.JFrame {
     } finally {
       ps.close();
       fis.close();
-            
+         */   
                  
 
         }

@@ -1,17 +1,15 @@
 
 package sanfelipe;
 
-/**
- *
- * @author Mao
- */
+import Presentacion.frminventario;
+
+
 public class SanFelipe {
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String[] args) {
-        // TODO code application logic here
+        frminventario frm= new frminventario();
+        frm.setVisible(true);
     }
     
 }
