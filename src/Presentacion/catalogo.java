@@ -1,19 +1,27 @@
 package Presentacion;
 
 import Logica.conexion;
+import Logica.imagenes;
 import com.mxrck.autocompleter.TextAutoCompleter;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.awt.image.ImageFilter;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.URL;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -2419,24 +2427,6 @@ public class catalogo extends javax.swing.JFrame {
             Image escala = conversion.getScaledInstance(260, 165, Image.SCALE_SMOOTH);
             ImageIcon calzado = new ImageIcon(escala);
             imgCalzado.setIcon(calzado);
-            
-            /*
-            FileInputStream fis = null;
-    PreparedStatement ps = null;
-    try {
-      conn.setAutoCommit(false);
-      File file = new File("myPhoto.png");
-      fis = new FileInputStream(file);
-      ps = conn.prepareStatement(INSERT_PICTURE);
-      ps.setString(1, "001");
-      ps.setString(2, "name");
-      ps.setBinaryStream(3, fis, (int) file.length());
-      ps.executeUpdate();
-      conn.commit();
-    } finally {
-      ps.close();
-      fis.close();
-         */   
                  
 
         }
@@ -2448,11 +2438,32 @@ public class catalogo extends javax.swing.JFrame {
        //iniciamos el proceso de guardar la creacion del Calzado
        
        // pasamos la imagen de icono de label a formato imagen
-        ImageIcon icon = new ImageIcon((Image) imgCalzado.getIcon());
-            Image conversion = icon.getImage();
-            
+       imagenes img=new imagenes();
+       Image imagenCalzado=img.iconToImage(imgCalzado.getIcon());
+        BufferedImage bi = new BufferedImage(imagenCalzado.getWidth(null), imagenCalzado.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = bi.createGraphics();
+        g2d.drawImage(imagenCalzado, 0, 0, null);
+        g2d.dispose(); 
+        
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try {
+            ImageIO.write(bi, "jpg", baos );
+        } catch (IOException ex) {
+            Logger.getLogger(catalogo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        byte[] imageInByte = baos.toByteArray();
+        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        // stmt.setBlob(parameterIndex, bais);
+        Blob blob;
+        try {
+            blob = cn.createBlob();
+            blob.setBytes(1, imageInByte);  
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
     }//GEN-LAST:event_btnGuardarActionPerformed
-
+    
     /**
      * @param args the command line arguments
      */
