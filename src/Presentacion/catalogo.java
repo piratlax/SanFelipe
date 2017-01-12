@@ -16,6 +16,7 @@ import java.math.RoundingMode;
 import java.net.URL;
 import java.sql.Blob;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -318,6 +319,7 @@ public class catalogo extends javax.swing.JFrame {
         txtTotal = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        txtPrueba = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         imgCalzado = new javax.swing.JLabel();
         btnImagen = new javax.swing.JButton();
@@ -1191,6 +1193,8 @@ public class catalogo extends javax.swing.JFrame {
                             .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addComponent(jButton2)
+                                .addGap(4, 4, 4)
+                                .addComponent(txtPrueba, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
@@ -1198,14 +1202,19 @@ public class catalogo extends javax.swing.JFrame {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(77, 77, 77)
-                        .addComponent(jButton2)))
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addGap(77, 77, 77)
+                                .addComponent(jButton2))
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtPrueba, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBorrar3)
@@ -2453,15 +2462,43 @@ public class catalogo extends javax.swing.JFrame {
         }
         byte[] imageInByte = baos.toByteArray();
         ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-        // stmt.setBlob(parameterIndex, bais);
-        Blob blob;
+        
         try {
-            blob = cn.createBlob();
-            blob.setBytes(1, imageInByte);  
+            PreparedStatement ps;
+            ps = cn.prepareStatement("insert into prueba(img) " + "values(?)");
+            ps.setBlob(1, bais);
+            ps.execute();
+            ps.close();
+            
         } catch (SQLException ex) {
             Logger.getLogger(catalogo.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
+         /*   
+        // ahora vamos a leer la imagen desde la base de datos
+            Statement st;
+        try {
+            st = cn.createStatement();
+            String sql = "select img from prueba where  idprueba=2";
+            
+
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                Blob blob = rs.getBlob("img");
+
+                int blobLength = (int) blob.length();
+
+                byte[] blobAsBytes = blob.getBytes(1, blobLength);
+                final BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(blobAsBytes));
+
+                txtPrueba.setIcon(new ImageIcon(bufferedImage));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(catalogo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(catalogo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+    */
     }//GEN-LAST:event_btnGuardarActionPerformed
     
     /**
@@ -2603,6 +2640,7 @@ public class catalogo extends javax.swing.JFrame {
     private javax.swing.JTextField txtPredecible;
     private javax.swing.JTextField txtPredecible1;
     private javax.swing.JTextField txtPredecible2;
+    private javax.swing.JLabel txtPrueba;
     private javax.swing.JTextField txtSalariosInyeccion;
     private javax.swing.JTextField txtSubManipulacion;
     private javax.swing.JTextField txtSubManipulacion1;
