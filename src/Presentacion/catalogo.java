@@ -2534,6 +2534,10 @@ public class catalogo extends javax.swing.JFrame {
             txtSubManipulacion.setText("0.00");
             txtSubManipulacion1.setText("0.00");
             txtSubManipulacion2.setText("0.00");
+            
+            // creamos la imagen de default del calzado
+            ImageIcon imagenDefault = new ImageIcon(getClass().getResource("/Graficos/imgCalzado.png"));
+            imgCalzado.setIcon(imagenDefault);
         } catch (SQLException ex) {
             Logger.getLogger(catalogo.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Hay un problema con la BD, Calzado no se ha grabado");
