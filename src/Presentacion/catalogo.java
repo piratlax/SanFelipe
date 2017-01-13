@@ -231,7 +231,6 @@ public class catalogo extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaMan = new javax.swing.JTable();
         btnBorrar = new javax.swing.JButton();
-        btnActualizar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         txtPar = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -253,7 +252,6 @@ public class catalogo extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaCos = new javax.swing.JTable();
         btnBorrar1 = new javax.swing.JButton();
-        btnActualizar1 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         txtParCost = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
@@ -275,7 +273,6 @@ public class catalogo extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaIny = new javax.swing.JTable();
         btnBorrar2 = new javax.swing.JButton();
-        btnActualizar2 = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
         txtParIny = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
@@ -439,8 +436,6 @@ public class catalogo extends javax.swing.JFrame {
             }
         });
 
-        btnActualizar.setText("Actualizar");
-
         jLabel6.setText("Consumo por par");
 
         jLabel7.setText("Precio");
@@ -496,10 +491,8 @@ public class catalogo extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 848, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(btnActualizar)
-                                .addGap(39, 39, 39)
                                 .addComponent(btnBorrar)
-                                .addGap(435, 435, 435)
+                                .addGap(581, 581, 581)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                         .addGap(111, 111, 111)
@@ -582,7 +575,6 @@ public class catalogo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBorrar)
-                    .addComponent(btnActualizar)
                     .addComponent(jLabel10)
                     .addComponent(txtSubManipulacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
@@ -619,8 +611,6 @@ public class catalogo extends javax.swing.JFrame {
                 btnBorrar1ActionPerformed(evt);
             }
         });
-
-        btnActualizar1.setText("Actualizar");
 
         jLabel9.setText("Consumo por par");
 
@@ -679,10 +669,8 @@ public class catalogo extends javax.swing.JFrame {
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 848, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(btnActualizar1)
-                                .addGap(39, 39, 39)
                                 .addComponent(btnBorrar1)
-                                .addGap(435, 435, 435)
+                                .addGap(581, 581, 581)
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                                         .addGap(111, 111, 111)
@@ -765,7 +753,6 @@ public class catalogo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBorrar1)
-                    .addComponent(btnActualizar1)
                     .addComponent(jLabel14)
                     .addComponent(txtSubManipulacion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
@@ -824,8 +811,6 @@ public class catalogo extends javax.swing.JFrame {
             }
         });
 
-        btnActualizar2.setText("Actualizar");
-
         jLabel18.setText("Consumo por par");
 
         jLabel19.setText("Precio");
@@ -881,10 +866,8 @@ public class catalogo extends javax.swing.JFrame {
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 848, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addComponent(btnActualizar2)
-                                .addGap(39, 39, 39)
                                 .addComponent(btnBorrar2)
-                                .addGap(435, 435, 435)
+                                .addGap(581, 581, 581)
                                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                                         .addGap(111, 111, 111)
@@ -967,7 +950,6 @@ public class catalogo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBorrar2)
-                    .addComponent(btnActualizar2)
                     .addComponent(jLabel20)
                     .addComponent(txtSubManipulacion2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
@@ -2721,9 +2703,6 @@ public class catalogo extends javax.swing.JFrame {
     private javax.swing.JButton btnActMaquila;
     private javax.swing.JButton btnActMaquila1;
     private javax.swing.JButton btnActMaquila2;
-    private javax.swing.JButton btnActualizar;
-    private javax.swing.JButton btnActualizar1;
-    private javax.swing.JButton btnActualizar2;
     private javax.swing.JButton btnActualizar3;
     private javax.swing.JButton btnBorrar;
     private javax.swing.JButton btnBorrar1;

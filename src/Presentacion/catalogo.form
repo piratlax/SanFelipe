@@ -219,10 +219,8 @@
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jScrollPane1" min="-2" pref="848" max="-2" attributes="0"/>
                                   <Group type="102" attributes="0">
-                                      <Component id="btnActualizar" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                                       <Component id="btnBorrar" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="435" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="581" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="1" attributes="0">
                                               <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
@@ -336,7 +334,6 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnBorrar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnActualizar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtSubManipulacion" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -437,11 +434,6 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBorrarActionPerformed"/>
               </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="btnActualizar">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Actualizar"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
@@ -565,10 +557,8 @@
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="jScrollPane2" alignment="0" min="-2" pref="848" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="btnActualizar1" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                                           <Component id="btnBorrar1" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="435" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="581" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" alignment="1" attributes="0">
                                                   <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
@@ -682,7 +672,6 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btnBorrar1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnActualizar1" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txtSubManipulacion1" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -783,11 +772,6 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBorrar1ActionPerformed"/>
                   </Events>
-                </Component>
-                <Component class="javax.swing.JButton" name="btnActualizar1">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Actualizar"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel9">
                   <Properties>
@@ -916,10 +900,8 @@
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="jScrollPane3" alignment="0" min="-2" pref="848" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="btnActualizar2" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                                           <Component id="btnBorrar2" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="435" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="581" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" alignment="1" attributes="0">
                                                   <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
@@ -1033,7 +1015,6 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btnBorrar2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnActualizar2" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel20" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txtSubManipulacion2" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -1134,11 +1115,6 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBorrar2ActionPerformed"/>
                   </Events>
-                </Component>
-                <Component class="javax.swing.JButton" name="btnActualizar2">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Actualizar"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel18">
                   <Properties>
