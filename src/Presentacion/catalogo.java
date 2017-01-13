@@ -317,7 +317,7 @@ public class catalogo extends javax.swing.JFrame {
         jLabel34 = new javax.swing.JLabel();
         txtTotal = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnCalcular = new javax.swing.JButton();
         txtPrueba = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         imgCalzado = new javax.swing.JLabel();
@@ -1156,10 +1156,10 @@ public class catalogo extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Calcular");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnCalcular.setText("Calcular");
+        btnCalcular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnCalcularActionPerformed(evt);
             }
         });
 
@@ -1191,7 +1191,7 @@ public class catalogo extends javax.swing.JFrame {
                             .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addComponent(jButton2)
+                                .addComponent(btnCalcular)
                                 .addGap(4, 4, 4)
                                 .addComponent(txtPrueba, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
@@ -1210,7 +1210,7 @@ public class catalogo extends javax.swing.JFrame {
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addGap(77, 77, 77)
-                                .addComponent(jButton2))
+                                .addComponent(btnCalcular))
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtPrueba, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
@@ -2412,10 +2412,10 @@ public class catalogo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTotalCosActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
         // recalculamos todo
         calculoTotal();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnCalcularActionPerformed
 
     private void txtCostoFabricacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCostoFabricacionActionPerformed
         // TODO add your handling code here:
@@ -2452,7 +2452,10 @@ public class catalogo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnImagenActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-       //iniciamos el proceso de guardar la creacion del Calzado
+        //recalculamos el zapato antes de que se grabe
+        btnCalcular.doClick();
+
+        //iniciamos el proceso de guardar la creacion del Calzado
        
        // pasamos la imagen de icono de label a formato imagen
        imagenes img=new imagenes();
@@ -2597,7 +2600,9 @@ public class catalogo extends javax.swing.JFrame {
             st.close();
             JOptionPane.showMessageDialog(null,"Elemento Eliminado");
             txtSubManipulacion.setText("0.00");
+            txtTotalMan.setText("0.00");
             mostrarTabla("manipulacion");
+            btnCalcular.doClick();
         }
         catch (HeadlessException | SQLException ex){
           JOptionPane.showMessageDialog(null,"no se elimino el elemento");
@@ -2624,7 +2629,9 @@ public class catalogo extends javax.swing.JFrame {
             st.close();
             JOptionPane.showMessageDialog(null,"Elemento Eliminado");
             txtSubManipulacion1.setText("0.00");
+            txtTotalCos.setText("0.00");
             mostrarTablaCost();
+            btnCalcular.doClick();
         }
         catch (HeadlessException | SQLException ex){
           JOptionPane.showMessageDialog(null,"no se elimino el elemento");
@@ -2651,7 +2658,9 @@ public class catalogo extends javax.swing.JFrame {
             st.close();
             JOptionPane.showMessageDialog(null,"Elemento Eliminado");
             txtSubManipulacion2.setText("0.00");
+            txtTotalIny.setText("0.00");
             mostrarTablaIny();
+            btnCalcular.doClick();
         }
         catch (HeadlessException | SQLException ex){
           JOptionPane.showMessageDialog(null,"no se elimino el elemento");
@@ -2708,6 +2717,7 @@ public class catalogo extends javax.swing.JFrame {
     private javax.swing.JButton btnBorrar1;
     private javax.swing.JButton btnBorrar2;
     private javax.swing.JButton btnBorrar3;
+    private javax.swing.JButton btnCalcular;
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnGuardar;
@@ -2720,7 +2730,6 @@ public class catalogo extends javax.swing.JFrame {
     private javax.swing.JButton btnNuevaMaquila2;
     private javax.swing.JCheckBox chkActivo;
     private javax.swing.JLabel imgCalzado;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
