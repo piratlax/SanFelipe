@@ -64,6 +64,7 @@ public class catalogo extends javax.swing.JFrame {
         txtSubTotal.setEnabled(false);
         txtCostoFabricacion.setEnabled(false);
         txtUtilidad.setEnabled(false);
+        btnGuardar.setEnabled(false);
 
     }
 
@@ -1852,6 +1853,8 @@ public class catalogo extends javax.swing.JFrame {
                     chkActivo.setEnabled(false);
                     txtSubManipulacion.setEnabled(false);
                     txtSubManipulacion.setText("0.00");
+                    btnGuardar.setEnabled(true);
+                    btnGuardar.setText("GUARDAR");
 
                     // creamos la imagen de default del calzado
                     ImageIcon imagenCalzado = new ImageIcon(getClass().getResource("/Graficos/imgCalzado.png"));
@@ -2463,16 +2466,83 @@ public class catalogo extends javax.swing.JFrame {
         byte[] imageInByte = baos.toByteArray();
         ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
         
+        //creamos las variables a integrar a la bd
+        String linea=txtLinea.getText();
+        String modelo=txtModelo.getText();
+        String articulo=txtArticulo.getText();
+        String color=txtColor.getText();
+        int activo=1;
+        if (!chkActivo.isSelected()){
+            activo=0;
+        }
+        Double manipulacion=Double.parseDouble(txtTotalMan.getText());
+        Double costura=Double.parseDouble(txtTotalCos.getText());
+        Double inyeccion=Double.parseDouble(txtTotalIny.getText());
+        Double gastos=Double.parseDouble(txtGastosInd.getText());
+        Double utilidad=Double.parseDouble(txtUtilidad.getText());
+        Double merma=Double.parseDouble(txtMerma.getText());
+        
+        
+        // pasamos toda la informacion a la base de datos calzado
+        
         try {
             PreparedStatement ps;
-            ps = cn.prepareStatement("insert into prueba(img) " + "values(?)");
-            ps.setBlob(1, bais);
+            ps = cn.prepareStatement("insert into calzado(linea,modelo,articulo,color,activo,manipulacion,costura,inyeccion,gastos,utilidad,merma,imagen) " + "values(?,?,?,?,?,?,?,?,?,?,?,?)");
+            ps.setString(1,linea);
+            ps.setString(2,modelo);
+            ps.setString(3,articulo);
+            ps.setString(4,color);
+            ps.setInt(5,activo);
+            ps.setDouble(6,manipulacion);
+            ps.setDouble(7,costura);
+            ps.setDouble(8,inyeccion);
+            ps.setDouble(9,gastos);
+            ps.setDouble(10,utilidad);
+            ps.setDouble(11,merma);
+            ps.setBlob(12, bais);
             ps.execute();
             ps.close();
-            
+            JOptionPane.showMessageDialog(null, "El calzado se ha integrado correctamente a la base de datos");
+            //ya que se grabo en la base de datos pasamos a dejar todo de nuevo para un nuevo calzado
+            btnCrear.setEnabled(true);
+            btnEditar.setEnabled(true);
+            btnGuardar.setEnabled(false);
+            btnIntegrar.setEnabled(false);
+            btnIntegrarCostura.setEnabled(false);
+            btnIntegrarInyeccion.setEnabled(false);
+            txtLinea.setText("");
+            txtLinea.setEnabled(true);
+            txtModelo.setText("");
+            txtModelo.setEnabled(true);
+            txtArticulo.setEnabled(true);
+            txtArticulo.setText("");
+            txtColor.setText("");
+            btnImagen.setEnabled(false);
+            mostrarTabla("manipulacion");
+            mostrarTablaCost();
+            mostrarTablaIny();
+            txtTotalMan.setText("0.00");
+            txtTotalCos.setText("0.00");
+            txtTotalIny.setText("0.00");
+            txtSalariosInyeccion.setText("0.00");
+            txtSubTotal.setText("0.00");
+            txtGastosInd.setText("0.00");
+            txtCostoFabricacion.setText("0.00");
+            txtUtilidad.setText("20");
+            txtMerma.setText("0.00");
+            txtTotal.setText("0.00");
+            txtSubManipulacion.setText("0.00");
+            txtSubManipulacion1.setText("0.00");
+            txtSubManipulacion2.setText("0.00");
         } catch (SQLException ex) {
             Logger.getLogger(catalogo.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Hay un problema con la BD, Calzado no se ha grabado");
         }
+        
+            
+            
+            
+            
          /*   
         // ahora vamos a leer la imagen desde la base de datos
             Statement st;
