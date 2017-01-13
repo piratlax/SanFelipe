@@ -4,6 +4,7 @@ import Logica.conexion;
 import Logica.imagenes;
 import com.mxrck.autocompleter.TextAutoCompleter;
 import java.awt.Graphics2D;
+import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageFilter;
@@ -432,6 +433,11 @@ public class catalogo extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tablaMan);
 
         btnBorrar.setText("Borrar");
+        btnBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarActionPerformed(evt);
+            }
+        });
 
         btnActualizar.setText("Actualizar");
 
@@ -608,6 +614,11 @@ public class catalogo extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tablaCos);
 
         btnBorrar1.setText("Borrar");
+        btnBorrar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrar1ActionPerformed(evt);
+            }
+        });
 
         btnActualizar1.setText("Actualizar");
 
@@ -807,6 +818,11 @@ public class catalogo extends javax.swing.JFrame {
         jScrollPane3.setViewportView(tablaIny);
 
         btnBorrar2.setText("Borrar");
+        btnBorrar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrar2ActionPerformed(evt);
+            }
+        });
 
         btnActualizar2.setText("Actualizar");
 
@@ -1353,6 +1369,7 @@ public class catalogo extends javax.swing.JFrame {
                     while (buscar.next()) {
                         material++;
                         JOptionPane.showMessageDialog(this, "El material ya esta en la hoja de especificacion");
+                        txtPredecible.setText("");
 
                     }
                 } catch (SQLException ex) {
@@ -1828,10 +1845,14 @@ public class catalogo extends javax.swing.JFrame {
                     repetido++;
                     JOptionPane.showMessageDialog(null, "El articulo " + txtArticulo.getText()
                             + " ya existe\n en la linea " + txtLinea.getText(), "Alerta", 0);
+                    
                 }
             } catch (Exception e) {
             }
             if (repetido == 0) {
+                txtLinea.setText(txtLinea.getText().toUpperCase());
+                txtModelo.setText(txtModelo.getText().toUpperCase());
+                txtColor.setText(txtColor.getText().toUpperCase());
                 int respuesta = JOptionPane.showConfirmDialog(this, "se va a crear el siguiente calzado\nLinea:"
                         + txtLinea.getText() + "\nModelo: "
                         + txtModelo.getText() + "\nArticulo: "
@@ -1935,6 +1956,7 @@ public class catalogo extends javax.swing.JFrame {
                     while (buscar.next()) {
                         material++;
                         JOptionPane.showMessageDialog(this, "El material ya esta en la hoja de especificacion");
+                        txtPredecible1.setText("");
 
                     }
                 } catch (SQLException ex) {
@@ -2189,6 +2211,7 @@ public class catalogo extends javax.swing.JFrame {
                     while (buscar.next()) {
                         material++;
                         JOptionPane.showMessageDialog(this, "El material ya esta en la hoja de especificacion");
+                        txtPredecible2.setText("");
 
                     }
                 } catch (SQLException ex) {
@@ -2574,6 +2597,86 @@ public class catalogo extends javax.swing.JFrame {
             
     */
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
+        // borrando un elemento de la tabla manipulacion
+         int fila = tablaMan.getSelectedRow();
+        String material;
+       if (fila>=0){
+           material=tablaMan.getValueAt(fila, 0).toString();
+           
+              
+        try{
+            String sql="DELETE FROM especificacion WHERE codigo='"+material+"' AND modelo='"+txtModelo.getText()+"' and articulo='"+txtArticulo.getText()+"'";
+            System.out.println (sql);
+            Statement st;
+            st=cn.createStatement();
+            st.executeUpdate(sql);
+            st.close();
+            JOptionPane.showMessageDialog(null,"Elemento Eliminado");
+            txtSubManipulacion.setText("0.00");
+            mostrarTabla("manipulacion");
+        }
+        catch (HeadlessException | SQLException ex){
+          JOptionPane.showMessageDialog(null,"no se elimino el elemento");
+          mostrarTabla("manipulacion");
+        }
+       }   
+    }//GEN-LAST:event_btnBorrarActionPerformed
+
+    private void btnBorrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrar1ActionPerformed
+       //borrar elemento de costura
+       // borrando un elemento de la tabla manipulacion
+         int fila = tablaCos.getSelectedRow();
+        String material;
+       if (fila>=0){
+           material=tablaCos.getValueAt(fila, 0).toString();
+           
+              
+        try{
+            String sql="DELETE FROM especificacion WHERE codigo='"+material+"' AND modelo='"+txtModelo.getText()+"' and articulo='"+txtArticulo.getText()+"'";
+            System.out.println (sql);
+            Statement st;
+            st=cn.createStatement();
+            st.executeUpdate(sql);
+            st.close();
+            JOptionPane.showMessageDialog(null,"Elemento Eliminado");
+            txtSubManipulacion1.setText("0.00");
+            mostrarTablaCost();
+        }
+        catch (HeadlessException | SQLException ex){
+          JOptionPane.showMessageDialog(null,"no se elimino el elemento");
+          mostrarTablaCost();
+        }
+       }   
+    }//GEN-LAST:event_btnBorrar1ActionPerformed
+
+    private void btnBorrar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrar2ActionPerformed
+      //borrar elemento de costura
+       // borrando un elemento de la tabla manipulacion
+         int fila = tablaIny.getSelectedRow();
+        String material;
+       if (fila>=0){
+           material=tablaIny.getValueAt(fila, 0).toString();
+           
+              
+        try{
+            String sql="DELETE FROM especificacion WHERE codigo='"+material+"' AND modelo='"+txtModelo.getText()+"' and articulo='"+txtArticulo.getText()+"'";
+            System.out.println (sql);
+            Statement st;
+            st=cn.createStatement();
+            st.executeUpdate(sql);
+            st.close();
+            JOptionPane.showMessageDialog(null,"Elemento Eliminado");
+            txtSubManipulacion2.setText("0.00");
+            mostrarTablaIny();
+        }
+        catch (HeadlessException | SQLException ex){
+          JOptionPane.showMessageDialog(null,"no se elimino el elemento");
+          mostrarTablaIny();
+        }
+       }   
+    }//GEN-LAST:event_btnBorrar2ActionPerformed
     
     /**
      * @param args the command line arguments
