@@ -1,6 +1,7 @@
 
 package sanfelipe;
 
+import Presentacion.Login;
 import Presentacion.frminventario;
 
 
@@ -8,7 +9,7 @@ public class SanFelipe {
 
     
     public static void main(String[] args) {
-        frminventario frm= new frminventario();
+        Login frm= new Login();
         frm.setVisible(true);
     }
     

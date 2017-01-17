@@ -2525,6 +2525,7 @@ public class catalogo extends javax.swing.JFrame {
             txtArticulo.setEnabled(true);
             txtArticulo.setText("");
             txtColor.setText("");
+            txtColor.setEnabled(true);
             btnImagen.setEnabled(false);
             mostrarTabla("manipulacion");
             mostrarTablaCost();

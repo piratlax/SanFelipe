@@ -10,9 +10,9 @@ import javax.swing.JOptionPane;
 
 public class conexion {
     public String db="san_felipe";
-    public String url="jdbc:mysql://127.0.0.1/"+db;
+    public String url="jdbc:mysql://192.168.0.11/"+db;
     public String user="root";
-    public String pass="";
+    public String pass="toor";
 
     public conexion() {
     }
