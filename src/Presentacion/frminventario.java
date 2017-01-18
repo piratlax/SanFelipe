@@ -13,6 +13,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 /*
 dejamos esto pendiente para los reportes
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -796,14 +801,14 @@ void inicio(){
     private Connection connection=new conexion().conectar();
     private void btnImpresionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImpresionActionPerformed
         //Impresion de inventario
-        /*
+        
         Map p=new HashMap();
         JasperReport report;
         JasperPrint print;
         
         try {
               report=JasperCompileManager.compileReport(new File("").getAbsolutePath()+
-                      "/src/reportes/rpInventario.jrxml");
+                      "/src/reportes/rptListadoInventario.jrxml");
               print=JasperFillManager.fillReport(report,p,connection);
               JasperViewer view=new JasperViewer(print,false);
               view.setTitle("Reporte de Inventarios");
@@ -811,7 +816,7 @@ void inicio(){
         } catch (Exception e) {
             e.printStackTrace();
         }
-        */
+        
     }//GEN-LAST:event_btnImpresionActionPerformed
     
     /**
