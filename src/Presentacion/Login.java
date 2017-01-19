@@ -5,6 +5,13 @@
  */
 package Presentacion;
 
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,8 +26,13 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
+       ImageIcon img = new ImageIcon("Graficos/icono.png");
+       this.setIconImage(img.getImage());
     }
-
+    public Image getIconImage(){
+     Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Graficos/icono.png"));
+     return retValue;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,6 +51,8 @@ public class Login extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getIconImage());
+        setUndecorated(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Acceder"));
 
