@@ -12,7 +12,7 @@ public class conexion {
     public String db="san_felipe";
     public String url="jdbc:mysql://localhost/"+db;
     public String user="root";
-    public String pass="toor";
+    public String pass="";
 
     public conexion() {
     }
