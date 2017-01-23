@@ -25,6 +25,7 @@ private ActionListener al;
                  
             }else {
                     t.stop();
+                    salir();
                 }}
         };
         t=new Timer(100, al);
@@ -33,18 +34,27 @@ private ActionListener al;
         t.start();
     }
 
-    
+    private void salir(){
+        this.dispose();
+        Login frm=new Login();
+        frm.setVisible(true);
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jProgreso = new javax.swing.JProgressBar();
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setIconImage(getIconImage());
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(jProgreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 350, 260, 30));
+
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Desarrollado por: Lic. Mao Rivera Sanchez Armas y Ing. Jonathan Gonzalez del Razo");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Graficos/splash.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -89,6 +99,7 @@ private ActionListener al;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JProgressBar jProgreso;
     // End of variables declaration//GEN-END:variables
 }

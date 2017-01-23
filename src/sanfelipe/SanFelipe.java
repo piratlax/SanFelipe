@@ -1,12 +1,12 @@
 
 package sanfelipe;
 
-import Presentacion.Login;
+import Presentacion.Splash;
 import Presentacion.frminventario;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import org.jvnet.substance.SubstanceLookAndFeel;
-import org.jvnet.substance.watermark.SubstanceImageWatermark;
+
 
 
 
@@ -19,13 +19,13 @@ public class SanFelipe {
             try{
                 JFrame.setDefaultLookAndFeelDecorated(true);                                
                 SubstanceLookAndFeel.setSkin("org.jvnet.substance.skin.CremeCoffeeSkin");
-                SubstanceLookAndFeel.setCurrentTheme("org.jvnet.substance.theme.SubstanceCremeTheme" );
+                //SubstanceLookAndFeel.setCurrentTheme("org.jvnet.substance.theme.SubstanceCremeTheme" );
                             
             }              
             catch(Exception e){
             } 
             
-            new Login().setVisible(true);
+            new Splash().setVisible(true);
         }
         });
     

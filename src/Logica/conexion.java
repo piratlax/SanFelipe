@@ -9,10 +9,10 @@ import javax.swing.JOptionPane;
 
 
 public class conexion {
-    public String db="san_felipe";
-    public String url="jdbc:mysql://localhost/"+db;
-    public String user="root";
-    public String pass="";
+    public String db="maoriver_sanFelipe";
+    public String url="jdbc:mysql://maorivera.com:3306/"+db;
+    public String user="maoriver_root";
+    public String pass="sanfelipe7502";
 
     public conexion() {
     }
